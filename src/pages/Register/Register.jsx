@@ -1,25 +1,34 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Register.scss'
+import { registerUser } from '../../api'
+import { useDispatch, useSelector } from 'react-redux'
+import { setRegister } from '../../redux/slices/authSlice'
 
 const Register = () => {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: ""
-  })
+  const user = useSelector(state => state.auth.registerInfo)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    setUser({...user, [name]: value})
+    dispatch(setRegister({...user, [name]: value}))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    try {
+      await registerUser(user)
+      navigate('/login', 
+      { state: { message: 'Login to continue' }, 
+      replace: true 
+    })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  console.log(user)
   return (
     <section className="login_container">
       <h1>Movie Reel</h1>
@@ -34,6 +43,7 @@ const Register = () => {
             value={user.name}
             onChange={handleChange}
             placeholder='eg John Doe'
+            required
           />
         </div>
         <div className="login_group">
@@ -45,6 +55,7 @@ const Register = () => {
             value={user.email}
             onChange={handleChange}
             placeholder='eg jdoe@email.com'
+            required
           />
         </div>
         <div className="login_group">
@@ -56,6 +67,7 @@ const Register = () => {
             value={user.password}
             onChange={handleChange}
             placeholder='********'
+            required
           />
         </div>
         <div className="login_control">
