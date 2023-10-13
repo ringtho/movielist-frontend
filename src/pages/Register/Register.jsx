@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Register.scss'
 import { registerUser } from '../../api'
@@ -9,6 +9,7 @@ const Register = () => {
   const user = useSelector(state => state.auth.registerInfo)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [error, setError] = useState("")
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -26,6 +27,7 @@ const Register = () => {
     })
     } catch (error) {
       console.log(error)
+      setError(error.response.data.error)
     }
   }
 
@@ -33,6 +35,7 @@ const Register = () => {
     <section className="login_container">
       <h1>Movie Reel</h1>
       <form className="login_wrapper" onSubmit={handleSubmit}>
+        {error && <p className="red">{error}</p>}
         <h3>Register</h3>
         <div className="login_group">
           <label htmlFor="name">Name</label>
@@ -42,7 +45,7 @@ const Register = () => {
             name="name"
             value={user.name}
             onChange={handleChange}
-            placeholder='eg John Doe'
+            placeholder="eg John Doe"
             required
           />
         </div>
@@ -54,7 +57,7 @@ const Register = () => {
             name="email"
             value={user.email}
             onChange={handleChange}
-            placeholder='eg jdoe@email.com'
+            placeholder="eg jdoe@email.com"
             required
           />
         </div>
@@ -66,7 +69,7 @@ const Register = () => {
             name="password"
             value={user.password}
             onChange={handleChange}
-            placeholder='********'
+            placeholder="********"
             required
           />
         </div>
