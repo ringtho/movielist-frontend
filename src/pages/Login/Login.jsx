@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Login.scss'
 import { loginUser } from '../../api'
 
@@ -9,6 +9,7 @@ const Login = () => {
     password: ""
   })
   const [error, setError] = useState('')
+  const navigate = useNavigate()
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
@@ -20,6 +21,7 @@ const Login = () => {
     try {
       const res = await loginUser(user)
       localStorage.setItem('movieToken', res.data.token)
+      navigate('/')
     } catch(error) {
       setError(error.response.data.error)
     }

@@ -1,0 +1,11 @@
+.navbar_container {
+    height: 70px;
+    background-color: var(--secondary-color);
+    padding: 1rem;
+
+    .navbar_logo {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
