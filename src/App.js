@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login, Register } from "./pages";
 import Layout from "./pages/Layout/Layout";
-import Movies from "./pages/Home/Movies";
+import Movies from "./pages/Movies/Movies";
 
 function App() {
 

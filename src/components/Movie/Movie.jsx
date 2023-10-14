@@ -1,5 +1,5 @@
 import React from 'react'
-import placeholderImg from '../../assets/placeholder.jpeg'
+import placeholderImg from '../../assets/placeholder2.jpeg'
 import Rating from '@mui/material/Rating'
 import './Movie.scss'
 
