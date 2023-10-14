@@ -1,0 +1,46 @@
+.movie_container {
+    background-color: var(--secondary-color);
+    width: 100%;
+
+    border-radius: 0.5rem;
+
+    @media screen and (min-width: 480px) {
+        max-width: 340px;
+    }
+
+    @media screen and (min-width: 768px) {
+        max-width: 330px;
+    }
+
+    .movie_thumbnail {
+        width: 100%;
+
+        img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+    }
+
+    .movie_details {
+        padding: 0 0.5rem;
+        height: 100px;
+
+        .movie_info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+
+            .title {
+                line-height: 22px;
+            }
+
+            small {
+                color: var(--theme-color);
+            }
+        }
+    }
+}

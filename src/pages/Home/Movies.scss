@@ -1,0 +1,17 @@
+.movies_container {
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.movies_wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+}
