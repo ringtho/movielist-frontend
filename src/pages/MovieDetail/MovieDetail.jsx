@@ -3,9 +3,10 @@ import './MovieDetail.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import { getMovie, getOmdbMovie } from '../../api'
-import { useDispatch } from 'react-redux'
-import { addMovie } from '../../redux/slices/moviesSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { addMovie, setIsLoading } from '../../redux/slices/moviesSlice'
 import DeleteMovie from '../DeleteMovie/DeleteMovie'
+import Loading from '../../components/Loading/Loading'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({})
@@ -16,6 +17,8 @@ const MovieDetail = () => {
   const date = new Date(movie.releaseDate)
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   const formattedDate = date.toLocaleDateString('en-US', options)
+  const { isLoading } = useSelector(state => state.movies)
+  console.log(isLoading)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -31,6 +34,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     setIsActive(false)
+    dispatch(setIsLoading(true))
     const getMovieDetails = async () => {
         try {
             const { data } = await getMovie(id)
@@ -38,16 +42,18 @@ const MovieDetail = () => {
             const ombdData = await getOmdbMovie({title: data.movie.title, year })
             setMovie(data.movie)
             setOmdb(ombdData.data)
+            dispatch(setIsLoading(false))
         } catch (error) {
             console.log(error)
         }
     }
     getMovieDetails()
-  }, [id])
+  }, [id, dispatch])
 
   return (
     <>
-    <section className="moviedetail">
+    {isLoading ? <Loading /> :
+    (<section className="moviedetail">
       <header>
         <h1>{movie.title}</h1>
       </header>
@@ -117,7 +123,7 @@ const MovieDetail = () => {
         </div>
       </div>
       
-    </section>
+    </section>)}
     { isActive && <DeleteMovie setIsActive={setIsActive} />}
     </>
   )

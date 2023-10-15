@@ -9,15 +9,23 @@ export const moviesSlice = createSlice({
       releaseDate: '',
       plot: '',
       rating: '',
-      notes: ''
+      notes: '',
     },
+    movies: [],
+    isLoading: false
   },
   reducers: {
     addMovie: (state, action) => {
       state.movie = action.payload
     },
+    setMovies: (state, action) => {
+      state.movies = action.payload
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload
+    }
   },
 })
 
-export const { addMovie } = moviesSlice.actions
+export const { addMovie, setMovies, setIsLoading } = moviesSlice.actions
 export default moviesSlice.reducer
