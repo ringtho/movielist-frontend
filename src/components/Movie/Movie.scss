@@ -3,13 +3,19 @@
     width: 100%;
 
     border-radius: 0.5rem;
+    // flex: 1;
+    // flex-basis: 400px;
 
     @media screen and (min-width: 480px) {
         max-width: 340px;
+        // flex-basis: 340px;
+        // flex: 0 0 calc(50% - 1rem);
     }
 
     @media screen and (min-width: 768px) {
         max-width: 330px;
+        // flex: 0 0 calc(33.3% - 1rem);
+        // flex-basis: 330px;
     }
 
     .movie_thumbnail {

@@ -11,7 +11,8 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+    // border: 1px solid red;
 }
 
 .movies_title {

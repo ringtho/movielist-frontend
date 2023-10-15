@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL
+const OMDB_KEY = process.env.REACT_APP_OMDB_API_KEY
 const getHeaders = () => {
     return {
       headers: {
@@ -35,3 +36,16 @@ export const getMovies = () => {
     const users = axios.get(`${API_URL}/movies`, config)
     return users
 } 
+
+export const getMovie = (id) => {
+  const config = getAuthHeaders()
+  const user = axios.get(`${API_URL}/movies/${id}`, config)
+  return user
+}
+
+export const getOmdbMovie = ({ title, year }) => {
+  const data = axios.get(
+    `https://www.omdbapi.com/?apikey=${OMDB_KEY}&t=${title}&y=${year}`
+  )
+  return data
+}
