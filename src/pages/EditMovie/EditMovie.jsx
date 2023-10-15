@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './EditMovie.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
@@ -9,7 +9,6 @@ const EditMovie = () => {
   const { movie } = useSelector(state => state.movies)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log(movie)
 
   const handleChange = (e) => {
     dispatch(addMovie({...movie, [e.target.name]: e.target.value}))
@@ -18,10 +17,8 @@ const EditMovie = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        const res = await updateMovie(movie)
-        console.log(res)
+        await updateMovie(movie)
         navigate(`/${movie.id}`)
-        
     } catch (error) {
         console.log(error)
     }

@@ -1,0 +1,31 @@
+.delete_container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid green;
+
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+    .delete_wrapper {
+        background-color: var(--secondary-color);
+        padding: 1rem;
+        border-radius: 0.5rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 450px;
+
+        .delete_controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+}

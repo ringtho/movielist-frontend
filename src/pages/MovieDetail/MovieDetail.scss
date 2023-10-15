@@ -81,11 +81,14 @@
 .moviedetail {
     min-height: 100vh;
     padding-bottom: 1rem;
+    position: relative;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    border: 1px solid red;
 
     @media screen and (min-width: 500px) {
         padding: 0 1rem;

@@ -5,10 +5,12 @@ import placeholderImg from '../../assets/placeholder2.jpeg'
 import { getMovie, getOmdbMovie } from '../../api'
 import { useDispatch } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
+import DeleteMovie from '../DeleteMovie/DeleteMovie'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({})
   const [omdb, setOmdb] = useState({})
+  const [isActive, setIsActive] = useState(false)
   const params = useParams()
   const id = params?.id
   const date = new Date(movie.releaseDate)
@@ -22,7 +24,13 @@ const MovieDetail = () => {
     navigate('edit')
   }
 
+  const handleDeleteCick = () => {
+    dispatch(addMovie(movie))
+    setIsActive(true)
+  }
+
   useEffect(() => {
+    setIsActive(false)
     const getMovieDetails = async () => {
         try {
             const { data } = await getMovie(id)
@@ -38,6 +46,7 @@ const MovieDetail = () => {
   }, [id])
 
   return (
+    <>
     <section className="moviedetail">
       <header>
         <h1>{movie.title}</h1>
@@ -98,11 +107,19 @@ const MovieDetail = () => {
             <p>{movie.notes}</p>
           </div>
         )}
-        <div className='btn_container'>
-          <button className="edit_btn" onClick={handleEditCick}>Edit</button>
+        <div className="btn_container">
+          <button className="edit_btn" onClick={handleEditCick}>
+            Edit
+          </button>
+          <button className="delete_btn" onClick={handleDeleteCick}>
+            Delete
+          </button>
         </div>
       </div>
+      
     </section>
+    { isActive && <DeleteMovie setIsActive={setIsActive} />}
+    </>
   )
 }
 
