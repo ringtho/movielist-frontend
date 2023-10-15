@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './MovieDetail.scss'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import { getMovie, getOmdbMovie } from '../../api'
+import { useDispatch } from 'react-redux'
+import { addMovie } from '../../redux/slices/moviesSlice'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({})
   const [omdb, setOmdb] = useState({})
   const params = useParams()
   const id = params?.id
-  console.log(movie.releaseDate)
   const date = new Date(movie.releaseDate)
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   const formattedDate = date.toLocaleDateString('en-US', options)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  console.log(omdb)
+  const handleEditCick = () => {
+    dispatch(addMovie(movie))
+    navigate('edit')
+  }
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -93,7 +99,7 @@ const MovieDetail = () => {
           </div>
         )}
         <div className='btn_container'>
-          <button className="edit_btn">Edit</button>
+          <button className="edit_btn" onClick={handleEditCick}>Edit</button>
         </div>
       </div>
     </section>

@@ -49,6 +49,12 @@ export const getMovie = (id) => {
   return movie
 }
 
+export const updateMovie = (data) => {
+  const config = getAuthHeaders()
+  const movie = axios.put(`${API_URL}/movies/${data.id}`, data, config)
+  return movie
+}
+
 export const getOmdbMovie = ({ title, year }) => {
   const data = axios.get(
     `https://www.omdbapi.com/?apikey=${OMDB_KEY}&t=${title}&y=${year}`
