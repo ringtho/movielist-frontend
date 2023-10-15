@@ -27,12 +27,18 @@ input, textarea {
   background-color: var(--primary-color);
   color: #FFF;
   letter-spacing: 0.75px;
+  font-family: var(--primary-font);
 
   caret-color: var(--theme-color);
 
   @media screen and (min-width: 1140px) {
     font-size: 1rem;
   }
+}
+
+textarea {
+  resize: none;
+  height: 120px;
 }
 
 button {

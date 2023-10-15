@@ -31,16 +31,22 @@ export const loginUser = (data) => {
     return user
 }
 
+export const createMovie = (data) => {
+  const config = getAuthHeaders()
+  const movie = axios.post(`${API_URL}/movies`, data, config)
+  return movie
+} 
+
 export const getMovies = () => {
     const config = getAuthHeaders()
-    const users = axios.get(`${API_URL}/movies`, config)
-    return users
+    const movies = axios.get(`${API_URL}/movies`, config)
+    return movies
 } 
 
 export const getMovie = (id) => {
   const config = getAuthHeaders()
-  const user = axios.get(`${API_URL}/movies/${id}`, config)
-  return user
+  const movie = axios.get(`${API_URL}/movies/${id}`, config)
+  return movie
 }
 
 export const getOmdbMovie = ({ title, year }) => {
