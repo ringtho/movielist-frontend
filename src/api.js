@@ -66,6 +66,12 @@ export const updateMovie = (data) => {
   return movie
 }
 
+export const favoriteMovie = (data) => {
+  const config = getAuthHeaders()
+  const movie = axios.patch(`${API_URL}/movies/${data.id}/favorite`, data, config)
+  return movie
+}
+
 export const deleteMovie = (id) => {
   const config = getAuthHeaders()
   const movie = axios.delete(`${API_URL}/movies/${id}`, config)

@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import Rating from '@mui/material/Rating'
 import './Movie.scss'
-import { getOmdbMovie } from '../../api'
+import { favoriteMovie, getOmdbMovie } from '../../api'
 import { useNavigate } from 'react-router-dom'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const Movie = ({ movie }) => {
   const [omdbPoster, setOmdbPoster] = useState("")
-  const { title, releaseDate, rating, thumbnail, id } = movie
+  const { title, releaseDate, rating, thumbnail, id, favorited } = movie
   const year = new Date(releaseDate).getFullYear()
   const navigate = useNavigate()
+  const [favorite, setFavorite] = useState(favorited)
 
   useEffect(() => {
     const getExternalData = async () => {
@@ -23,8 +26,30 @@ const Movie = ({ movie }) => {
     getExternalData()
   }, [title, year])
 
+  useEffect(() => {
+    const updateFavoriteMovie = async () => {
+      try {
+        const data = { id, favorited: favorite }
+        await favoriteMovie(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    updateFavoriteMovie()
+  }, [favorite, id])
+
+  // const handleFavorite = async () => {
+  //   const data = { id, favorited: favorite}
+  //   try {
+  //     const res = await favoriteMovie(data)
+  //     console.log(res)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
   return (
-    <section className="movie_container" onClick={() => navigate(`${id}`)}>
+    <section className="movie_container">
       <div className="movie_thumbnail">
         <img
           src={omdbPoster ? omdbPoster : thumbnail ? thumbnail : placeholderImg}
@@ -34,7 +59,9 @@ const Movie = ({ movie }) => {
       <div className="movie_details">
         <div className="movie_info">
           <small>{year}</small>
-          <p className="title">{title}</p>
+          <p className="title" onClick={() => navigate(`${id}`)}>
+            {title}
+          </p>
           <Rating
             name="size-medium"
             defaultValue={rating}
@@ -45,6 +72,19 @@ const Movie = ({ movie }) => {
               color: '#BB86Fc',
             }}
           />
+          {favorite ? (
+            <FavoriteIcon
+              className="favorite_filled"
+              onClick={() => {
+                setFavorite(!favorite)
+              }}
+            />
+          ) : (
+            <FavoriteBorderIcon
+              className="favorite_empty"
+              onClick={() => setFavorite(!favorite)}
+            />
+          )}
         </div>
       </div>
     </section>

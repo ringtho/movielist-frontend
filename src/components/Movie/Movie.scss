@@ -5,15 +5,17 @@
     padding: 0 0 2rem 0;
 
     border-radius: 0.5rem;
-    flex: 1 1 300px;
+    flex: 1 1 280px;
 
     @media screen and (min-width: 375px) {
+        flex: 1 1 300px;
         max-width: 300px;
         // flex-basis: 340px;
         // flex: 0 0 calc(50% - 1rem);
     }
 
     @media screen and (min-width: 768px) {
+        flex: 1 1 300px;
         max-width: 300px;
         // flex: 0 0 calc(33.3% - 1rem);
         // flex-basis: 330px;
@@ -51,5 +53,24 @@
                 color: var(--theme-color);
             }
         }
+    }
+}
+
+.favorite_filled {
+    color: var(--theme-color);
+
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+}
+
+.favorite_empty {
+    color: var(--theme-color);
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
     }
 }
