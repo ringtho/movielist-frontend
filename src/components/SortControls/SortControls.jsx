@@ -85,7 +85,6 @@ const SortControls = ({ allMovies }) => {
       >
         <option value="title">Title</option>
         <option value="date">Date</option>
-        <option value="rating">Rating</option>
       </select>
 
       <label>Order:</label>

@@ -1,0 +1,23 @@
+.back_controls {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+    color: rgba(255,255,255,0.7);
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+        color: rgba(255,255,255,0.4);
+        transition-delay: 0.09s;
+    }
+
+    .back_icon {
+        font-size: 0.75rem;
+        color: var(--theme-color);
+    }
+
+    @media screen and (min-width: 768px) {
+        font-size: 0.9rem;
+    }
+}

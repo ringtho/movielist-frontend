@@ -7,6 +7,7 @@ import { setMovies, setIsLoading } from '../../redux/slices/moviesSlice'
 import Loading from '../../components/Loading/Loading'
 import Pagination from '@mui/material/Pagination'
 import SortControls from '../../components/SortControls/SortControls'
+import { useNavigate } from 'react-router-dom'
 
 const Movies = () => {
   const { movies, isLoading } = useSelector(state => state.movies)
@@ -16,6 +17,7 @@ const Movies = () => {
   const [searchList, setSearchList] = useState([])
   const [allMovies, setAllMovies] = useState([])
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   useEffect(() => {
     dispatch(setIsLoading(true))
@@ -72,6 +74,7 @@ const Movies = () => {
   return (
     <section className="movies_container">
       <h1 className="movies_title">Movies</h1>
+      <button onClick={ () => navigate('add')}>Add Movie</button>
       <SortControls allMovies={allMovies} />
       {isLoading ? (
         <Loading />
