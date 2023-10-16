@@ -67,6 +67,58 @@ const Movies = () => {
     setSearchList(results)
   }
 
+  const movieDescendingSort = () => {
+    const sortedList = allMovies.sort((a,b) => {
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return -1
+      }
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return 1
+      }
+      return 0
+    })
+    dispatch(setMovies([...sortedList]))
+  }
+
+  const movieAscendingSort = () => {
+    const sortedList = allMovies.sort((a, b) => {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1
+      }
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1
+      }
+      return 0
+    })
+    dispatch(setMovies([...sortedList]))
+  }
+
+  const movieYearAscSort = () => {
+    const sortedList = allMovies.sort((a, b) => {
+      if (a.releaseDate < b.releaseDate) {
+        return -1
+      }
+      if (a.releaseDate > b.releaseDate) {
+        return 1
+      }
+      return 0
+    })
+    dispatch(setMovies([...sortedList]))
+  }
+
+  const movieYearDescSort = () => {
+    const sortedList = allMovies.sort((a, b) => {
+      if (a.releaseDate > b.releaseDate) {
+        return -1
+      }
+      if (a.releaseDate < b.releaseDate) {
+        return 1
+      }
+      return 0
+    })
+    dispatch(setMovies([...sortedList]))
+  }
+
   const movieList = search && searchList.length > 0 ? searchList : movies
   console.log(movieList)
 
@@ -87,6 +139,16 @@ const Movies = () => {
               onChange={handleSearchChange}
               onKeyUp={searchMovieByTitle}
             />
+          </div>
+          <div className="sort_controls">
+            <p>Sort By Title</p>
+            <div onClick={() => movieAscendingSort()}>Up</div>
+            <div onClick={() => movieDescendingSort()}>Down</div>
+          </div>
+          <div className="sort_controls">
+            <p>Sort By Release Date</p>
+            <div onClick={() => movieYearAscSort()}>Up</div>
+            <div onClick={() => movieYearDescSort()}>Down</div>
           </div>
           <div className="movies_wrapper">
             {movieList.map((movie) => (
