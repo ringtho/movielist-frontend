@@ -7,14 +7,48 @@
     align-items: center;
 }
 
+.movies_top {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    // border: 1px solid red;
+}
+
+.pagination_controls {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
 .movies_wrapper {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-items: center;
     justify-content: flex-start;
-    // border: 1px solid red;
+    margin: 0 auto;
+    border: 1px solid red;
 }
 
 .movies_title {
     color: var(--theme-color);
+}
+
+.MuiPagination-root {
+    button {
+        color: #FFF;
+    }
+}
+
+.search_controls {
+    display: flex;
+}
+.search_input {
+    border: 1px solid var(--secondary-color);
+    width: 100%;
+
+    &:focus,
+    &:hover {
+        outline: 2px solid var(--secondary-color);
+    }
 }

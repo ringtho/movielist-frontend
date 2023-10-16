@@ -37,11 +37,21 @@ export const createMovie = (data) => {
   return movie
 } 
 
-export const getMovies = (page) => {
-    let pageNo = page - 1
+export const getMovies = ({ page, size }) => {
+    const pageNo = page - 1 || 0
+    const sizeNo = size || 0
     const config = getAuthHeaders()
-    const movies = axios.get(`${API_URL}/movies?page=${pageNo}`, config)
+    const movies = axios.get(`${API_URL}/movies?page=${pageNo}&&size=${sizeNo}`, config)
     return movies
+} 
+
+export const getAllMovies = () => {
+  const config = getAuthHeaders()
+  const movies = axios.get(
+    `${API_URL}/movies/all`,
+    config
+  )
+  return movies
 } 
 
 export const getMovie = (id) => {

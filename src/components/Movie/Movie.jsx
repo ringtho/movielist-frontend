@@ -12,7 +12,6 @@ const Movie = ({ movie }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    
     const getExternalData = async () => {
       try {
         const { data } = await getOmdbMovie({ title, year })
