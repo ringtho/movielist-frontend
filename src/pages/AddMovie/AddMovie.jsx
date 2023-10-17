@@ -4,21 +4,17 @@ import { createMovie } from '../../api'
 import Back from '../../components/Back/Back'
 import { useNavigate } from 'react-router-dom'
 import DatePickerItem from '../../components/DatePicker/DatePicker'
+import { useDispatch, useSelector } from 'react-redux'
+import { addMovie } from '../../redux/slices/moviesSlice'
 
 const AddMovie = () => {
-  const [movie, setMovie] = useState({
-    title: "",
-    genre: "",
-    plot: "",
-    releaseDate: "",
-    rating: "",
-    notes: ""
-  })
+  const dispatch = useDispatch()
+  const { movie } = useSelector((state) => state.movies)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setMovie({...movie, [e.target.name]: e.target.value })
+    dispatch(addMovie({ ...movie, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = async (e) => {
@@ -26,14 +22,6 @@ const AddMovie = () => {
     setIsSubmitting(true)
     try {
         await createMovie(movie)
-        setMovie({
-          title: '',
-          genre: '',
-          plot: '',
-          releaseDate: '',
-          rating: '',
-          notes: '',
-        })
         setIsSubmitting(false)
         navigate('/')
     } catch (error) {
@@ -85,7 +73,7 @@ const AddMovie = () => {
           </div>
           <div className="add_controls">
             <label htmlFor="releaseDate">Release Date</label>
-            <DatePickerItem setMovie={setMovie} movie={movie} />
+            <DatePickerItem />
           </div>
           <div className="add_controls">
             <label className="rating">Rating</label>

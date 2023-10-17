@@ -1,4 +1,11 @@
 .layout_container {
     background-color: var(--primary-color);
     min-height: 100vh;
+    position: relative;
+}
+
+
+.outlet_container {
+    border: 1px solid red;
+    position: relative;
 }

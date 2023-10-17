@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './EditMovie.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
 import { updateMovie } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import Back from '../../components/Back/Back'
+import DatePickerItem from '../../components/DatePicker/DatePicker'
+import dayjs from 'dayjs'
 
 const EditMovie = () => {
   const { movie } = useSelector(state => state.movies)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -17,8 +20,10 @@ const EditMovie = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
     try {
         await updateMovie(movie)
+        setIsSubmitting(false)
         navigate(`/${movie.id}`)
     } catch (error) {
         console.log(error)
@@ -27,7 +32,7 @@ const EditMovie = () => {
   
   return (
     <section className="addmovie_container">
-      <div className='addmovie'>
+      <div className="addmovie">
         <Back />
         <form className="addmovie_wrapper" onSubmit={handleSubmit}>
           <h1>Edit</h1>
@@ -69,7 +74,7 @@ const EditMovie = () => {
           </div>
           <div className="add_controls">
             <label htmlFor="releaseDate">Release Date</label>
-            <input
+            {/* <input
               type="text"
               id="releaseDate"
               name="releaseDate"
@@ -77,7 +82,8 @@ const EditMovie = () => {
               onChange={handleChange}
               placeholder="eg 2023-04-19"
               required
-            />
+            /> */}
+            <DatePickerItem value={dayjs(movie.releaseDate)} />
           </div>
           <div className="add_controls">
             <label className="rating">Rating</label>
@@ -102,7 +108,9 @@ const EditMovie = () => {
               onChange={handleChange}
             />
           </div>
-          <button>Submit</button>
+          <button disabled={isSubmitting} className="btn">
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
         </form>
       </div>
     </section>

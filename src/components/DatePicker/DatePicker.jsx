@@ -3,17 +3,23 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './DatePicker.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { addMovie } from '../../redux/slices/moviesSlice'
 
-const DatePickerItem = ({ setMovie, movie }) => {
+const DatePickerItem = ({ value }) => {
+  const valueItem = value || null
+  const dispatch = useDispatch()
+  const { movie } = useSelector(state => state.movies)
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         name="releaseDate"
+        value={valueItem}
         onChange={(newValue) =>
-          setMovie({
+          dispatch(addMovie({
             ...movie,
             releaseDate: newValue.format('YYYY-MM-DD'),
-          })
+          }))
         }
         isRequired
         className="date_picker"
