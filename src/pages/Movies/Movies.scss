@@ -27,14 +27,6 @@
     flex-direction: column;
     gap: 2rem;
     width: 100%;
-
-    @media screen and (min-width: 768px) {
-        width: 90%;
-    }
-
-    @media screen and (min-width: 1440px) {
-        width: 90%;
-    }
 }
 
 .movies_wrapper {

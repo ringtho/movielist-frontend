@@ -1,0 +1,93 @@
+
+.layout_container {
+    background-color: var(--primary-color);
+    min-height: 100vh;
+    position: relative;
+}
+
+
+.outlet_container {
+    position: relative;
+}
+
+.navbar_container {
+    height: 70px;
+    background-color: var(--secondary-color);
+    padding: 1rem;
+
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    box-shadow: 1px 2px 10px rgba(0,0,0,0.5);
+
+    @media screen and (min-width: 480px) {
+        padding: 2rem;
+    }
+
+    .navbar_logo {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        a {
+            text-decoration: none;
+            color: #FFF;
+
+            h3 {
+                font-size: 1rem;
+            }
+        }
+
+        .navbar_hamburger {
+
+            &:hover,
+            &:focus {
+                cursor: pointer;
+                color: var(--theme-color);
+            }
+        }
+    }
+}
+
+.notfound_container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 1rem;
+
+    .notfound_message {
+        font-size: 0.95rem;
+        text-align: center;
+        padding: 2rem 1rem;
+        border: 1px solid var(--secondary-color);
+        border-radius: 0.5rem;
+        color: rgba(255,255,255,0.5);
+        max-width: 768px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 1.25rem;
+        }
+    }
+
+    .notfound_error {
+        color: var(--tertiary-color);
+        font-size: 5rem;
+    }
+
+    .notfound_other {
+        font-size: 2rem;
+        color: rgba(255,255,255,0.5);
+    }
+}
+
+.notfound_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

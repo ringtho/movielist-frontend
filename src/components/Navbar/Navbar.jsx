@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import './Navbar.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('movieToken')
+    navigate('/login')
+  }
   const [isActive, setIsActive] = useState(false)
   return (
     <nav className="navbar_container">
@@ -40,7 +45,7 @@ const Navbar = () => {
                   <p>Update Account</p>
                 </div>
                 <div>
-                  <p>LogOut</p>
+                  <p onClick={() => logout()}>LogOut</p>
                 </div>
               </div>
             </div>
