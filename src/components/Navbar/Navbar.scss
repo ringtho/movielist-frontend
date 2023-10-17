@@ -10,6 +10,10 @@
     z-index: 2;
     box-shadow: 1px 2px 10px rgba(0,0,0,0.5);
 
+    @media screen and (min-width: 480px) {
+        padding: 2rem;
+    }
+
     .navbar_logo {
         height: 100%;
         display: flex;

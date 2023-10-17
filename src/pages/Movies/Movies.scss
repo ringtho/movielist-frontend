@@ -1,10 +1,25 @@
 .movies_container {
     padding: 1rem;
-
     display: flex;
     flex-direction: column;
     gap: 2rem;
     align-items: center;
+
+    @media screen and (min-width: 480px) {
+        padding: 2rem;
+    }
+}
+
+.movies_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: unset;
+
+    .add_btn {
+        font-size: 0.75rem;
+    }
 }
 
 .movies_top {
@@ -22,31 +37,40 @@
     }
 }
 
+.movies_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.movies {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+// pagination controls
 .pagination_controls {
     display: flex;
     justify-content: center;
     padding: 1rem;
 }
 
-.movies_wrapper {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.movies_title {
-    color: var(--theme-color);
-}
-
 .MuiPagination-root {
     button {
         color: #FFF;
+        background-color: var(--secondary-color);
+
+        &:hover {
+            background-color: var(--theme-color);
+        }
     }
 }
 
+
+// search controls
 .search_controls {
     display: flex;
 }
@@ -60,6 +84,8 @@
     }
 }
 
+
+// sort controls
 .sorts_large {
     display: none;
 
@@ -69,6 +95,7 @@
 }
 
 .sorts_small {
+    width: 100%;
     @media screen and (min-width: 768px) {
         display: none
     }

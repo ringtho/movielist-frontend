@@ -74,8 +74,12 @@ const Movies = () => {
 
   return (
     <section className="movies_container">
-      <h1 className="movies_title">Movies</h1>
-      <button onClick={() => navigate('add')}>Add Movie</button>
+      <header className='movies_header'>
+        <h1 className="movies_title">Movies</h1>
+        <button onClick={() => navigate('add')} className='add_btn'>
+          Add Movie
+        </button>
+      </header>
       <div className="sorts_large">
         <SortControls allMovies={allMovies} />
       </div>
@@ -86,21 +90,23 @@ const Movies = () => {
         <Loading />
       ) : (
         <div className="movies_top">
-          <div className="search_controls">
-            <input
-              className="search_input"
-              placeholder="Search for movie by title"
-              type="text"
-              name="search"
-              value={search}
-              onChange={handleSearchChange}
-              onKeyUp={searchMovieByTitle}
-            />
-          </div>
           <div className="movies_wrapper">
-            {movieList.map((movie) => (
-              <Movie key={movie.id} movie={movie} />
-            ))}
+            <div className="search_controls">
+              <input
+                className="search_input"
+                placeholder="Search for movie by title"
+                type="text"
+                name="search"
+                value={search}
+                onChange={handleSearchChange}
+                onKeyUp={searchMovieByTitle}
+              />
+            </div>
+            <div className="movies">
+              {movieList.map((movie) => (
+                <Movie key={movie.id} movie={movie} />
+              ))}
+            </div>
           </div>
           {pages > 1 && (
             <div className="pagination_controls">

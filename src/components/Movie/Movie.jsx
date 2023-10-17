@@ -38,19 +38,9 @@ const Movie = ({ movie }) => {
     updateFavoriteMovie()
   }, [favorite, id])
 
-  // const handleFavorite = async () => {
-  //   const data = { id, favorited: favorite}
-  //   try {
-  //     const res = await favoriteMovie(data)
-  //     console.log(res)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   return (
     <section className="movie_container">
-      <div className="movie_thumbnail">
+      <div className="movie_thumbnail" onClick={() => navigate(`${id}`)}>
         <img
           src={omdbPoster ? omdbPoster : thumbnail ? thumbnail : placeholderImg}
           alt={title}
@@ -58,33 +48,41 @@ const Movie = ({ movie }) => {
       </div>
       <div className="movie_details">
         <div className="movie_info">
-          <small>{year}</small>
+          <div className="movie_year">
+            <small>{year}</small>
+            {favorite ? (
+              <FavoriteIcon
+                className="favorite_filled"
+                sx={{
+                  fontSize: '1rem',
+                }}
+                onClick={() => {
+                  setFavorite(!favorite)
+                }}
+              />
+            ) : (
+              <FavoriteBorderIcon
+                className="favorite_empty"
+                sx={{
+                  fontSize: '1rem',
+                }}
+                onClick={() => setFavorite(!favorite)}
+              />
+            )}
+          </div>
           <p className="title" onClick={() => navigate(`${id}`)}>
             {title}
           </p>
           <Rating
             name="size-medium"
             defaultValue={rating}
-            max={5}
             readOnly
+            size='small'
             precision={0.5}
             sx={{
               color: '#BB86Fc',
             }}
           />
-          {favorite ? (
-            <FavoriteIcon
-              className="favorite_filled"
-              onClick={() => {
-                setFavorite(!favorite)
-              }}
-            />
-          ) : (
-            <FavoriteBorderIcon
-              className="favorite_empty"
-              onClick={() => setFavorite(!favorite)}
-            />
-          )}
         </div>
       </div>
     </section>
