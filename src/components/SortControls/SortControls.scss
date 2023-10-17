@@ -1,0 +1,23 @@
+
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  label {
+    font-size: 0.9rem;
+  }
+}
+
+.select-box {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.sort-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+}

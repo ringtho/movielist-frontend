@@ -55,6 +55,11 @@ button {
 
   &:hover {
     cursor: pointer;
-    background-color: #fb90b7;
+    background-color: rgba(187,134,252, 0.8);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: rgba(187,134,252, 0.4);
   }
 }

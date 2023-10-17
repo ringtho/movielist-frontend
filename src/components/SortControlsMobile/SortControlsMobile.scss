@@ -1,0 +1,31 @@
+.sort_small {
+    display: flex;
+    gap: 0.5rem;
+
+    select {
+        padding: 0.5rem 1rem;
+        height: 100%;
+        outline: none;
+        border: none;
+        height: 100%;
+        max-width: 200px;
+        border-radius: 0.5rem 0 0 0.5rem;
+        background-color: var(--primary-color);
+        border: 1px solid var(--secondary-color);
+        color: #FFF;
+        opacity: 0.6;
+        font-family: var(--primary-font);
+        font-size: small;
+
+        optgroup {
+            font-size: 0.75rem;
+        }
+        
+    }
+
+    button {
+        border-radius: 0 0.5rem 0.5rem 0;
+        height: 100%;
+        padding: 0.5rem 1rem;
+    }
+}

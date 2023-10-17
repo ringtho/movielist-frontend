@@ -2,6 +2,12 @@ import React, { useState } from 'react'
 import './SortControls.scss'
 import { useDispatch } from 'react-redux'
 import { setMovies } from '../../redux/slices/moviesSlice'
+import { 
+  movieTitleAscSort, 
+  movieTitleDescSort, 
+  movieYearAscSort, 
+  movieYearDescSort 
+} from '../utils/sort'
 
 const SortControls = ({ allMovies }) => {
   const dispatch = useDispatch()
@@ -10,69 +16,21 @@ const SortControls = ({ allMovies }) => {
 
   const handleSort = () => {
     if (sortBy === 'title' && sortOrder === 'asc') {
-        movieTitleAscSort()
+      const sortedList = movieTitleAscSort(allMovies)
+      dispatch(setMovies([...sortedList]))
     }
     if (sortBy === 'title' && sortOrder === 'desc') {
-      movieTitleDescSort()
+      const sortedList = movieTitleDescSort(allMovies)
+      dispatch(setMovies([...sortedList]))
     }
     if (sortBy === 'date' && sortOrder === 'asc') {
-      movieYearAscSort()
+      const sortedList = movieYearAscSort(allMovies)
+      dispatch(setMovies([...sortedList]))
     }
      if (sortBy === 'date' && sortOrder === 'desc') {
-       movieYearDescSort()
+      const sortedList = movieYearDescSort(allMovies)
+      dispatch(setMovies([...sortedList]))
      }
-  }
-
-  const movieTitleDescSort = () => {
-    const sortedList = allMovies.sort((a, b) => {
-      if (a.title.toLowerCase() > b.title.toLowerCase()) {
-        return -1
-      }
-      if (a.title.toLowerCase() < b.title.toLowerCase()) {
-        return 1
-      }
-      return 0
-    })
-    dispatch(setMovies([...sortedList]))
-  }
-
-  const movieTitleAscSort = () => {
-    const sortedList = allMovies.sort((a, b) => {
-      if (a.title.toLowerCase() < b.title.toLowerCase()) {
-        return -1
-      }
-      if (a.title.toLowerCase() > b.title.toLowerCase()) {
-        return 1
-      }
-      return 0
-    })
-    dispatch(setMovies([...sortedList]))
-  }
-
-  const movieYearAscSort = () => {
-    const sortedList = allMovies.sort((a, b) => {
-      if (a.releaseDate < b.releaseDate) {
-        return -1
-      }
-      if (a.releaseDate > b.releaseDate) {
-        return 1
-      }
-      return 0
-    })
-    dispatch(setMovies([...sortedList]))
-  }
-
-  const movieYearDescSort = () => {
-    const sortedList = allMovies.sort((a, b) => {
-      if (a.releaseDate > b.releaseDate) {
-        return -1
-      }
-      if (a.releaseDate < b.releaseDate) {
-        return 1
-      }
-      return 0
-    })
-    dispatch(setMovies([...sortedList]))
   }
 
   return (

@@ -8,6 +8,7 @@ import Loading from '../../components/Loading/Loading'
 import Pagination from '@mui/material/Pagination'
 import SortControls from '../../components/SortControls/SortControls'
 import { useNavigate } from 'react-router-dom'
+import SortConttrolsMobile from '../../components/SortControlsMobile/SortControlsMobile'
 
 const Movies = () => {
   const { movies, isLoading } = useSelector(state => state.movies)
@@ -74,8 +75,13 @@ const Movies = () => {
   return (
     <section className="movies_container">
       <h1 className="movies_title">Movies</h1>
-      <button onClick={ () => navigate('add')}>Add Movie</button>
-      <SortControls allMovies={allMovies} />
+      <button onClick={() => navigate('add')}>Add Movie</button>
+      <div className="sorts_large">
+        <SortControls allMovies={allMovies} />
+      </div>
+      <div className="sorts_small">
+        <SortConttrolsMobile allMovies={allMovies} />
+      </div>
       {isLoading ? (
         <Loading />
       ) : (
