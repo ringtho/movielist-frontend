@@ -8,12 +8,14 @@ import { addMovie, setIsLoading } from '../../redux/slices/moviesSlice'
 import DeleteMovie from '../DeleteMovie/DeleteMovie'
 import Loading from '../../components/Loading/Loading'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import NotFoundMovie from '../../components/NotFoundMovie/NotFoundMovie'
 import Rating from '@mui/material/Rating'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({})
   const [omdb, setOmdb] = useState({})
   const [isActive, setIsActive] = useState(false)
+  const [error, setError] = useState(null)
   const params = useParams()
   const id = params?.id
   const date = new Date(movie.releaseDate)
@@ -45,7 +47,7 @@ const MovieDetail = () => {
             setOmdb(ombdData.data)
             dispatch(setIsLoading(false))
         } catch (error) {
-            console.log(error)
+            setError(error?.response?.status)
         }
     }
     getMovieDetails()
@@ -53,11 +55,11 @@ const MovieDetail = () => {
 
   return (
     <>
-      {isLoading ? (
+      {error === 404 ? <NotFoundMovie /> : isLoading ? (
         <div className='moviedetails_loading'>
           <Loading />
         </div>
-      ) : (
+      )  : (
         <section className="moviedetail">
           <div className="moviedetail_back">
             <div className="back_controls" onClick={() => navigate('/')}>

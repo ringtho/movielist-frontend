@@ -7,6 +7,7 @@ import AddMovie from "./pages/AddMovie/AddMovie";
 import EditMovie from "./pages/EditMovie/EditMovie";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./pages/NotFound/NotFound";
+import NotFoundMovie from "./components/NotFoundMovie/NotFoundMovie";
 
 function App() {
 
@@ -49,8 +50,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="*"
+              element={
+                <ProtectedRoute>
+                  <NotFoundMovie />
+                </ProtectedRoute>
+              }
+            />
           </Route>
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>

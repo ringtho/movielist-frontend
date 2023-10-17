@@ -1,19 +1,12 @@
 import React from 'react'
-import './NotFound.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import './NotFoundMovie.scss'
+import { useNavigate } from 'react-router-dom'
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken'
 
-const NotFound = () => {
+const NotFoundMovie = () => {
   const navigate = useNavigate()
   return (
     <main className="layout_container">
-      <nav className="navbar_container">
-        <div className="navbar_logo">
-          <Link to="/">
-            <h3>MovieReel</h3>
-          </Link>
-        </div>
-      </nav>
       <section className="notfound_container">
         <p className="notfound_message">
           Why did the book go to therapy? It had too many missing pages, and it
@@ -30,5 +23,5 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default NotFoundMovie
 
