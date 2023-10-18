@@ -56,7 +56,8 @@ const MovieDetail = () => {
     getMovieDetails()
   }, [id, dispatch])
 
-
+  const API_URL = process.env.REACT_APP_API_URL
+  const img = API_URL + `/${movie.thumbnail}`
 
   return (
     <>
@@ -82,10 +83,10 @@ const MovieDetail = () => {
               <div className="poster">
                 <img
                   src={
-                    omdb.Poster
+                    movie.thumbnail
+                      ? img
+                      : omdb.Poster
                       ? omdb.Poster
-                      : movie.thumbnail
-                      ? movie.thumbnail
                       : placeholderImg
                   }
                   alt={movie.title}

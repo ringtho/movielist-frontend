@@ -26,8 +26,9 @@ const Register = () => {
       replace: true 
     })
     } catch (error) {
-      console.log(error)
       setError(error.response.data.error)
+    } finally {
+      dispatch(setRegister({ email: "", name: "", password: "" }))
     }
   }
 

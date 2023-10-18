@@ -38,11 +38,20 @@ const Movie = ({ movie }) => {
     updateFavoriteMovie()
   }, [favorite, id])
 
+  const API_URL = process.env.REACT_APP_API_URL
+  const img = API_URL + `/${movie.thumbnail}`
+
   return (
     <section className="movie_container">
       <div className="movie_thumbnail" onClick={() => navigate(`${id}`)}>
         <img
-          src={omdbPoster ? omdbPoster : thumbnail ? thumbnail : placeholderImg}
+          src={
+            thumbnail
+              ? img
+              : omdbPoster
+              ? omdbPoster
+              : placeholderImg
+          }
           alt={title}
         />
       </div>
@@ -77,7 +86,7 @@ const Movie = ({ movie }) => {
             name="size-medium"
             defaultValue={rating}
             readOnly
-            size='small'
+            size="small"
             precision={0.5}
             sx={{
               color: '#BB86Fc',

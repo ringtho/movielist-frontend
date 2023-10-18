@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './Login.scss'
 import { loginUser } from '../../api'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLogin } from '../../redux/slices/authSlice'
 
 const Login = () => {
-  const [user, setUser] = useState({
-    email: "",
-    password: ""
-  })
+  const {loginInfo: user } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const { state } = useLocation()
+  console.log(state)
   const [error, setError] = useState('')
   const navigate = useNavigate()
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    setUser({...user, [name]: value})
+    dispatch(setLogin({...user, [name]: value}))
   }
 
   const handleSubmit = async (e) => {
@@ -24,6 +26,8 @@ const Login = () => {
       navigate('/')
     } catch(error) {
       setError(error.response.data.error)
+    } finally {
+      dispatch(setLogin({ email: "", password: "" }))
     }
   }
 
@@ -32,6 +36,7 @@ const Login = () => {
       <h1>Movie Reel</h1>
       <form className="login_wrapper" onSubmit={handleSubmit}>
         {error && <p className="red">{error}</p>}
+        {state?.message && <p className='alert'>{state?.message}</p>}
         <h3>Login</h3>
         <div className="login_group">
           <label htmlFor="email">Email</label>

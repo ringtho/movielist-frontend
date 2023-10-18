@@ -16,12 +16,14 @@
 
     .login_wrapper {
         background-color: var(--secondary-color);
+        border-radius: 0.5rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
         padding: 2rem 1.5rem;
         width: 100%;
         max-width: 400px;
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 
         .login_group {
             display: flex;
@@ -79,4 +81,8 @@
             }
         }
     }
+}
+
+.alert {
+    color: var(--alert-color);
 }
