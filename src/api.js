@@ -31,6 +31,12 @@ export const loginUser = (data) => {
     return user
 }
 
+export const getUser = () => {
+  const config = getAuthHeaders()
+  const user = axios.get(`${API_URL}/user`, config)
+  return user
+} 
+
 export const createMovie = (data) => {
   const config = getAuthHeaders()
   const movie = axios.post(`${API_URL}/movies`, data, config)

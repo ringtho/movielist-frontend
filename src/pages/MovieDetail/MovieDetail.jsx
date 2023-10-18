@@ -10,9 +10,12 @@ import Loading from '../../components/Loading/Loading'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import NotFoundMovie from '../../components/NotFoundMovie/NotFoundMovie'
 import Rating from '@mui/material/Rating'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const MovieDetail = () => {
-  const [movie, setMovie] = useState({})
+  const [movie, setMovie] = useState({
+    rating: 0
+  })
   const [omdb, setOmdb] = useState({})
   const [isActive, setIsActive] = useState(false)
   const [error, setError] = useState(null)
@@ -53,13 +56,17 @@ const MovieDetail = () => {
     getMovieDetails()
   }, [id, dispatch])
 
+
+
   return (
     <>
-      {error === 404 ? <NotFoundMovie /> : isLoading ? (
-        <div className='moviedetails_loading'>
+      {error === 404 ? (
+        <NotFoundMovie />
+      ) : isLoading ? (
+        <div className="moviedetails_loading">
           <Loading />
         </div>
-      )  : (
+      ) : (
         <section className="moviedetail">
           <div className="moviedetail_back">
             <div className="back_controls" onClick={() => navigate('/')}>
@@ -87,7 +94,17 @@ const MovieDetail = () => {
             </div>
             <div className="moviedetail_con_wrapper">
               <div className="movieinfo">
-                <h2 className="detail_title tile_title">{movie.title}</h2>
+                <div className="moviedetail_header">
+                  <h2 className="detail_title tile_title">{movie.title}</h2>
+                  {movie.favorited && (
+                    <FavoriteIcon
+                      className="favorite_no_action"
+                      sx={{
+                        fontSize: '1.25rem',
+                      }}
+                    />
+                  )}
+                </div>
                 <div className="detail_desc">
                   <p>
                     {omdb.Genre
@@ -105,45 +122,45 @@ const MovieDetail = () => {
                   <span>Release Date</span>
                   <p>{formattedDate}</p>
                 </div>
+              </div>
+              {omdb.Director && (
                 <div className="detail_desc">
-                  <span>Personal Rating</span>
-                  {/* <Rating
-                    name="size-medium"
-                    defaultValue={movie.rating}
+                  <span>Director</span>
+                  <p>{omdb.Director}</p>
+                </div>
+              )}
+              {omdb.Actors && (
+                <div className="detail_desc">
+                  <span>Cast</span>
+                  <p>{omdb.Actors}</p>
+                </div>
+              )}
+              <div className="detail_desc">
+                <span>Personal Rating</span>
+                <div>
+                  <Rating
+                    value={movie.rating}
                     readOnly
-                    size="small"
                     precision={0.5}
                     sx={{
                       color: '#BB86Fc',
                     }}
-                  /> */}
-                  <p>{movie.rating}/5</p>
+                  />
                 </div>
                 {omdb.imdbRating && (
                   <div className="detail_desc">
                     <span>IMDB Rating</span>
-                    {/* <Rating
-                      name="size-medium"
-                      defaultValue={parseInt(omdb.imdbRating)}
-                      readOnly
-                      size="small"
-                      precision={0.5}
-                      sx={{
-                        color: '#BB86Fc',
-                      }} */}
-                    <p>{omdb.imdbRating}/10</p>
-                  </div>
-                )}
-                {omdb.Director && (
-                  <div className="detail_desc">
-                    <span>Director</span>
-                    <p>{omdb.Director}</p>
-                  </div>
-                )}
-                {omdb.Actors && (
-                  <div className="detail_desc">
-                    <span>Cast</span>
-                    <p>{omdb.Actors}</p>
+                    <div>
+                      <Rating
+                        name="size-large"
+                        value={parseInt(omdb.imdbRating) / 2}
+                        readOnly
+                        precision={0.5}
+                        sx={{
+                          color: '#9A7D31',
+                        }}
+                      />
+                    </div>
                   </div>
                 )}
               </div>

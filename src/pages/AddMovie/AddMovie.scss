@@ -73,3 +73,21 @@
 button:disabled {
     cursor: not-allowed;
 }
+
+.rating_results {
+    display: flex;
+    // border: 1px solid red;
+    justify-content: space-between;
+
+    p {
+        font-size: 0.85rem;
+    }
+
+    .gold {
+        color: #9A7D31;
+    }
+
+    .other {
+        color: var(--tertiary-color);
+    }
+}

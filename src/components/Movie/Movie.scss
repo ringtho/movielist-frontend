@@ -11,7 +11,9 @@
 
     &:hover,
     &:focus {
-        // transform: scale(1.1);
+        border: 1px solid #FFF;
+        transform: scale(1.1);
+        transition: transform 0.5s;
     }
 
     .movie_thumbnail {
@@ -73,6 +75,10 @@
         cursor: pointer;
         transform: scale(1.2);
     }
+}
+
+.favorite_no_action {
+    color: var(--tertiary-color);
 }
 
 .favorite_empty {

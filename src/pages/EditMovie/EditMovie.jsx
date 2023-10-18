@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import Back from '../../components/Back/Back'
 import DatePickerItem from '../../components/DatePicker/DatePicker'
 import dayjs from 'dayjs'
+import Rating from '@mui/material/Rating'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const EditMovie = () => {
   const { movie } = useSelector(state => state.movies)
@@ -74,30 +77,61 @@ const EditMovie = () => {
           </div>
           <div className="add_controls">
             <label htmlFor="releaseDate">Release Date</label>
-            {/* <input
-              type="text"
-              id="releaseDate"
-              name="releaseDate"
-              value={movie.releaseDate}
-              onChange={handleChange}
-              placeholder="eg 2023-04-19"
-              required
-            /> */}
+
             <DatePickerItem value={dayjs(movie.releaseDate)} />
           </div>
           <div className="add_controls">
             <label className="rating">Rating</label>
-            <input
-              type="number"
-              min={1}
-              max={5}
-              id="rating"
-              name="rating"
-              value={movie.rating}
-              onChange={handleChange}
-              placeholder="eg 4"
-              required
-            />
+            <div className="rating_results">
+              <Rating
+                name="size-medium"
+                sx={{
+                  color: '#BB86Fc',
+                  width: '32px',
+                  height: '32px',
+                }}
+                size="large"
+                value={movie.rating}
+                onChange={(event, newValue) =>
+                  dispatch(addMovie({ ...movie, rating: newValue }))
+                }
+                precision={0.5}
+              />
+              <p>{movie.rating}</p>
+            </div>
+          </div>
+          <div className="add_controls">
+            <label className="rating">Favorite</label>
+            <div className="rating_results">
+              {movie.favorited ? (
+                <FavoriteIcon
+                  className="favorite_filled"
+                  sx={{
+                    fontSize: '1.25rem',
+                  }}
+                  onClick={() => {
+                    dispatch(
+                      addMovie({ ...movie, favorited: !movie.favorited })
+                    )
+                  }}
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  className="favorite_empty"
+                  sx={{
+                    fontSize: '1.25rem',
+                  }}
+                  onClick={() => {
+                    dispatch(
+                      addMovie({ ...movie, favorited: !movie.favorited })
+                    )
+                  }}
+                />
+              )}
+              <small className={movie.favorited ? 'gold' : 'other'}>
+                {movie.favorited ? 'favorite' : 'Not favorite'}
+              </small>
+            </div>
           </div>
           <div className="add_controls">
             <label id="notes">Notes</label>

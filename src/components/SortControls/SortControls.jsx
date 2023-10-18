@@ -9,55 +9,46 @@ import {
   movieYearDescSort 
 } from '../utils/sort'
 
-const SortControls = ({ allMovies }) => {
-  const dispatch = useDispatch()
-  const [sortBy, setSortBy] = useState('title')
-  const [sortOrder, setSortOrder] = useState('asc')
+const SortControlsMobile = ({ allMovies }) => {
+    const dispatch = useDispatch()
+    const [sortBy, setSortBy] = useState('title asc')
 
-  const handleSort = () => {
-    if (sortBy === 'title' && sortOrder === 'asc') {
-      const sortedList = movieTitleAscSort(allMovies)
-      dispatch(setMovies([...sortedList]))
-    }
-    if (sortBy === 'title' && sortOrder === 'desc') {
-      const sortedList = movieTitleDescSort(allMovies)
-      dispatch(setMovies([...sortedList]))
-    }
-    if (sortBy === 'date' && sortOrder === 'asc') {
-      const sortedList = movieYearAscSort(allMovies)
-      dispatch(setMovies([...sortedList]))
-    }
-     if (sortBy === 'date' && sortOrder === 'desc') {
-      const sortedList = movieYearDescSort(allMovies)
-      dispatch(setMovies([...sortedList]))
-     }
+    const handleSort = () => {
+      if (sortBy === 'title asc') {
+          const sortedList = movieTitleAscSort(allMovies)
+          dispatch(setMovies([...sortedList]))
+      }
+      if (sortBy === 'title desc') {
+        const sortedList = movieTitleDescSort(allMovies)
+        dispatch(setMovies([...sortedList]))
+      }
+      if (sortBy === 'date asc') {
+        const sortedList = movieYearAscSort(allMovies)
+        dispatch(setMovies([...sortedList]))
+      }
+      if (sortBy === 'date desc') {
+        const sortedList = movieYearDescSort(allMovies)
+        dispatch(setMovies([...sortedList]))
+      } else {
+          return
+      }
   }
 
   return (
-    <section className="sort-controls">
-      <label>Sort By:</label>
-      <select
-        className="select-box"
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-      >
-        <option value="title">Title</option>
-        <option value="date">Date</option>
+    <div className="sort_small">
+      <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+        <optgroup>
+          <option value="title asc">
+            Title Ascending
+          </option>
+          <option value="title desc">Title Descending</option>
+          <option value="date asc">Release Date Ascending</option>
+          <option value="date desc">Release Date Descending</option>
+        </optgroup>
       </select>
-
-      <label>Order:</label>
-      <select
-        className="select-box"
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
-      >
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
-
-      <button className="sort-button" onClick={() => handleSort()}>Sort</button>
-    </section>
+      <button onClick={handleSort}>Sort</button>
+    </div>
   )
 }
 
-export default SortControls
+export default SortControlsMobile

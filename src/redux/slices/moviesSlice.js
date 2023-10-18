@@ -8,8 +8,9 @@ export const moviesSlice = createSlice({
       genre: '',
       releaseDate: '',
       plot: '',
-      rating: '',
+      rating: 0,
       notes: '',
+      favorited: false
     },
     movies: [],
     isLoading: false
