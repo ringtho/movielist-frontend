@@ -48,6 +48,7 @@ export const getUser = () => {
 } 
 
 export const createMovie = (data) => {
+  console.log(data)
   const config = getHeadersFormData()
   const movie = axios.post(`${API_URL}/movies`, data, config)
   return movie
@@ -76,9 +77,9 @@ export const getMovie = (id) => {
   return movie
 }
 
-export const updateMovie = (data) => {
-  const config = getAuthHeaders()
-  const movie = axios.put(`${API_URL}/movies/${data.id}`, data, config)
+export const updateMovie = ({ formData, id }) => {
+  const config = getHeadersFormData()
+  const movie = axios.put(`${API_URL}/movies/${id}`, formData, config)
   return movie
 }
 
@@ -91,6 +92,12 @@ export const favoriteMovie = (data) => {
 export const deleteMovie = (id) => {
   const config = getAuthHeaders()
   const movie = axios.delete(`${API_URL}/movies/${id}`, config)
+  return movie
+}
+
+export const deleteThumbnail = (id) => {
+  const config = getAuthHeaders()
+  const movie = axios.delete(`${API_URL}/movies/${id}/image`, config)
   return movie
 }
 

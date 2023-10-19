@@ -29,7 +29,7 @@ const AddMovie = () => {
     e.preventDefault()
     setIsSubmitting(true)
     const formData = new FormData()
-    formData.append('thumbnail', file)
+    formData.append('image', file)
     formData.append('title', movie.title)
     formData.append('plot', movie.plot)
     formData.append('genre', movie.genre)

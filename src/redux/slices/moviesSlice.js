@@ -14,7 +14,7 @@ export const moviesSlice = createSlice({
       thumbnail: ''
     },
     movies: [],
-    isLoading: false
+    isLoading: false,
   },
   reducers: {
     addMovie: (state, action) => {
@@ -29,5 +29,5 @@ export const moviesSlice = createSlice({
   },
 })
 
-export const { addMovie, setMovies, setIsLoading } = moviesSlice.actions
+export const { addMovie, setMovies, setIsLoading, setOmdbPoster } = moviesSlice.actions
 export default moviesSlice.reducer

@@ -1,0 +1,45 @@
+.thumbnail_img {
+    
+    
+
+    img {
+        height: 200px;
+        width: 200px;
+        border-radius: 0.5rem;
+    }
+}
+
+.thumbnail_cont {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.thumbnail_upload {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.remove_thumbnail {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    color: var(--tertiary-color);
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}
+
+.remove_text {
+    font-size: 0.75rem;
+}
