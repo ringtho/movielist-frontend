@@ -8,6 +8,7 @@ import EditMovie from "./pages/EditMovie/EditMovie";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./pages/NotFound/NotFound";
 import NotFoundMovie from "./components/NotFoundMovie/NotFoundMovie";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
 
@@ -26,38 +27,31 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/add"
-              element={
+            <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+            }/>
+            <Route path="/add" element={
                 <ProtectedRoute>
                   <AddMovie />
                 </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/:id"
-              element={
+            }/>
+            <Route path="/:id" element={
                 <ProtectedRoute>
                   <MovieDetail />
                 </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/:id/edit"
-              element={
+            }/>
+            <Route path="/:id/edit" element={
                 <ProtectedRoute>
                   <EditMovie />
                 </ProtectedRoute>
-              }
-            />
-            <Route
-              path="*"
-              element={
+            }/>
+            <Route path="*" element={
                 <ProtectedRoute>
                   <NotFoundMovie />
                 </ProtectedRoute>
-              }
-            />
+            }/>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

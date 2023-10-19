@@ -9,9 +9,15 @@ const Navbar = () => {
   const [user, setUser] = useState({})
   const [isActive, setIsActive] = useState(false)
   const navigate = useNavigate()
+
   const logout = () => {
     localStorage.removeItem('movieToken')
     navigate('/login')
+  }
+
+  const handleNavigate = () => {
+    navigate('/profile')
+    setIsActive(!isActive)
   }
 
   useEffect(() => {
@@ -58,7 +64,7 @@ const Navbar = () => {
               </div>
               <div className="controls">
                 <div>
-                  <p>Update Account</p>
+                  <p onClick={()=> handleNavigate()}>Profile</p>
                 </div>
                 <div>
                   <p onClick={() => logout()}>LogOut</p>

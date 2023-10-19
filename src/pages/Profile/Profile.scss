@@ -1,0 +1,129 @@
+.profile_details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    align-items: center;
+
+    @media screen and (min-width: 480px) {
+        padding: 2rem;
+    }
+
+    h2 {
+        align-self: center;
+    }
+
+    .profile_forms {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        @media screen and (min-width: 768px) {
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
+
+    .profile_form {
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--secondary-color);
+        border-radius: 0.5rem;
+        gap: 1rem;
+        width: 100%;
+        max-width: 400px;
+
+        .red, .alert {
+            font-size: 0.75rem;
+        }
+
+        small {
+            font-size: 0.75rem;
+            color: var(--theme-color);
+
+            @media screen and (min-width: 768px) {
+                font-size: 0.80rem;
+            }
+        }
+
+        .profile_group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            label, input {
+                font-size: 0.75rem;
+            }
+            
+            label {
+                opacity: 0.7;
+            }
+
+            @media screen and (min-width: 768px) {
+                font-size: 0.9rem;
+            }
+
+            @media screen and (min-width: 1440px) {
+                font-size: 1rem;
+            }
+            
+        }
+    }
+
+    .profile_avatar {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        align-self: center;
+        background-color: var(--tertiary-color);
+
+    }
+
+
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+
+    .profile_user{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+
+        h4 {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .profile_email {
+            color: var(--theme-color);
+        }
+
+        p {
+            font-size: 0.85rem;
+        }
+
+        .profile_time {
+            opacity: 0.5;
+        }
+
+        @media screen and (min-width: 768px) {
+            p, h4 {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

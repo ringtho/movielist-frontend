@@ -45,10 +45,15 @@ export const getUser = () => {
   const config = getAuthHeaders()
   const user = axios.get(`${API_URL}/user`, config)
   return user
-} 
+}
+
+export const updatePassword = (data) => {
+  const config = getAuthHeaders()
+  const user = axios.patch(`${API_URL}/user/update-password`, data, config)
+  return user
+}
 
 export const createMovie = (data) => {
-  console.log(data)
   const config = getHeadersFormData()
   const movie = axios.post(`${API_URL}/movies`, data, config)
   return movie
