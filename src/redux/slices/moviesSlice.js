@@ -6,11 +6,12 @@ export const moviesSlice = createSlice({
     movie: {
       title: '',
       genre: '',
-      releaseDate: '',
+      releaseDate: null,
       plot: '',
       rating: 0,
       notes: '',
-      favorited: false
+      favorited: false,
+      thumbnail: ''
     },
     movies: [],
     isLoading: false

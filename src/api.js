@@ -19,6 +19,16 @@ const getAuthHeaders = () => {
   }
 }
 
+const getHeadersFormData = () => {
+  const token = localStorage.getItem('movieToken')
+  return {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+}
+
 export const registerUser = (data) => {
     const config = getHeaders()
     const user = axios.post(`${API_URL}/auth/register`, data, config)
@@ -38,7 +48,7 @@ export const getUser = () => {
 } 
 
 export const createMovie = (data) => {
-  const config = getAuthHeaders()
+  const config = getHeadersFormData()
   const movie = axios.post(`${API_URL}/movies`, data, config)
   return movie
 } 

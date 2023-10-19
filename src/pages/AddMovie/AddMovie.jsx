@@ -12,6 +12,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
+  const [file, setFile] = useState("")
   const { movie } = useSelector((state) => state.movies)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -20,26 +21,53 @@ const AddMovie = () => {
     dispatch(addMovie({ ...movie, [e.target.name]: e.target.value }))
   }
 
+  const handleImageChange = (e) => {
+    setFile(e.target.files[0])
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    const formData = new FormData()
+    formData.append('thumbnail', file)
+    formData.append('title', movie.title)
+    formData.append('plot', movie.plot)
+    formData.append('genre', movie.genre)
+    formData.append('releaseDate', movie.releaseDate)
+    formData.append('rating', movie.rating)
+    formData.append('notes', movie.notes)
+    formData.append('favorited', movie.favorited)
     try {
-        await createMovie(movie)
+        await createMovie(formData)
+        dispatch(
+          addMovie({
+            title: '',
+            genre: '',
+            releaseDate: null,
+            plot: '',
+            rating: 0,
+            notes: '',
+            favorited: false,
+            thumbnail: '',
+          })
+        )
+        setFile('')
         setIsSubmitting(false)
-        dispatch(addMovie({}))
         navigate('/')
     } catch (error) {
         console.log(error)
     }
   }
 
-  console.log(movie)
-
   return (
     <section className="addmovie_container">
       <div className="addmovie">
         <Back />
-        <form className="addmovie_wrapper" onSubmit={handleSubmit}>
+        <form
+          className="addmovie_wrapper"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
           <h1>Add a new movie?</h1>
           <div className="add_controls">
             <label htmlFor="title">Title</label>
@@ -79,7 +107,7 @@ const AddMovie = () => {
           </div>
           <div className="add_controls">
             <label htmlFor="releaseDate">Release Date</label>
-            <DatePickerItem />
+            <DatePickerItem value={movie.releaseDate} />
           </div>
           <div className="add_controls">
             <label className="rating">Rating</label>
@@ -130,9 +158,19 @@ const AddMovie = () => {
                 />
               )}
               <small className={movie.favorited ? 'gold' : 'other'}>
-                {movie.favorited ? 'favorite' : 'Not favorite' }
+                {movie.favorited ? 'favorite' : 'Not favorite'}
               </small>
             </div>
+          </div>
+          <div className="add_controls">
+            <label id="thumbnail">Upload Thumbnail</label>
+            <input
+              id="thumbnail"
+              name="thumbnail"
+              type="file"
+              // value={image}
+              onChange={handleImageChange}
+            />
           </div>
           <div className="add_controls">
             <label id="notes">Notes</label>
