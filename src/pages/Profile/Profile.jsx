@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Profile.scss'
 import { getUser, updatePassword } from '../../api'
+import { Avatar } from '@mui/material'
 
 const Profile = () => {
   const [user, setUser] = useState({})
@@ -15,7 +16,6 @@ const Profile = () => {
   const formattedDate = date.toLocaleDateString('en-US', options)
 
   useEffect(() => {
-
     const getUserDetails = async () => {
         try {
             const { data } = await getUser()
@@ -41,7 +41,6 @@ const Profile = () => {
     try {
         const { data } = await updatePassword(newPassword)
         setAlert(data.msg)
-        // console.log(res)
     } catch (error) {
         setError(error.response.data.error)
     } finally {
@@ -52,12 +51,20 @@ const Profile = () => {
     }
   }
 
+  const API_URL = process.env.REACT_APP_API_URL
+  const img = API_URL + `/${user.profileImg}`
+
   return (
     <section className="profile_container">
       <div className="profile_details">
         <h2>Account</h2>
         <div className="profile">
-          <div className="profile_avatar"></div>
+          <div className="profile_avatar">
+            <Avatar src={user.profileImg && img} sx={{
+              height: '150px',
+              width: '150px'
+            }} />
+          </div>
           <div className="profile_user">
             <h4>{user.name}</h4>
             <p className="profile_email">{user.email}</p>

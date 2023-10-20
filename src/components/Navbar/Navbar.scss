@@ -20,6 +20,13 @@
         align-items: center;
         justify-content: space-between;
 
+        .navbar_controls {
+            display: flex;
+            // border: 1px solid red;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
         a {
             text-decoration: none;
             color: #FFF;
@@ -76,12 +83,7 @@
             padding: 1rem;
 
             .avatar_container {
-                height: 150px;
-                width: 150px;
-                background-color: aliceblue;
-                border-radius: 50%;
-                // color: #FFF;
-
+                width: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;

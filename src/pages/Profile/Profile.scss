@@ -74,15 +74,12 @@
     }
 
     .profile_avatar {
-        height: 100px;
-        width: 100px;
-        border-radius: 50%;
         align-self: center;
-        background-color: var(--tertiary-color);
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-
-
 }
 
 .profile {

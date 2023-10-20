@@ -3,6 +3,7 @@ import './Navbar.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import { Avatar } from '@mui/material'
 import { getUser } from '../../api'
 
 const Navbar = () => {
@@ -32,6 +33,8 @@ const Navbar = () => {
     getUserDetails()
   }, [])
 
+  const API_URL = process.env.REACT_APP_API_URL
+  const img = API_URL + `/${user.profileImg}`
   
   return (
     <nav className="navbar_container">
@@ -40,6 +43,9 @@ const Navbar = () => {
           <h3>MovieReel</h3>
         </Link>
         <div className="navbar_controls">
+          <div className='navbar_avatar'>
+            <Avatar src={user.profileImg && img} />
+          </div>
           <div
             className="navbar_hamburger"
             onClick={() => setIsActive(!isActive)}
@@ -56,7 +62,12 @@ const Navbar = () => {
           <div className="pop_up">
             <div className="pop_wrapper">
               <div className="user_info">
-                <div className="avatar_container">Avatar</div>
+                <div className="avatar_container">
+                  <Avatar src={user.profileImg && img} sx={{
+                    height:'90px',
+                    width: '90px'
+                  }} />
+                </div>
                 <div className="user_details">
                   <p>{user.name}</p>
                   <small>{ user.email }</small>
