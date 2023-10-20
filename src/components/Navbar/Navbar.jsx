@@ -5,10 +5,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { Avatar } from '@mui/material'
 import { getUser } from '../../api'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const [user, setUser] = useState({})
   const [isActive, setIsActive] = useState(false)
+  const { reload } = useSelector(state => state.auth)
   const navigate = useNavigate()
 
   const logout = () => {
@@ -31,7 +33,7 @@ const Navbar = () => {
       }
     }
     getUserDetails()
-  }, [])
+  }, [reload])
 
   const API_URL = process.env.REACT_APP_API_URL
   const img = API_URL + `/${user.profileImg}`

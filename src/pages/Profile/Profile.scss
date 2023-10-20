@@ -77,8 +77,43 @@
         align-self: center;
 
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
+        height: 180px;
+
+        // border: 1px solid red;
+
+        // .avatar_pic {
+        //     position: relative;
+        // }
+
+        .avatar_upload_controls {
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.6);
+            padding: 0.25rem;
+            border-radius: 50%;
+            height: 35px;
+            width: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            &:hover,
+            &:focus {
+                background-color: rgba(255,255,255,0.6);
+                box-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+
+                & > * {
+                    opacity: 0.6;
+                    // color: var(--theme-color);
+                }
+            }
+        }
     }
 }
 

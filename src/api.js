@@ -53,6 +53,12 @@ export const updatePassword = (data) => {
   return user
 }
 
+export const updateUserDetails = (data) => {
+  const config = getHeadersFormData()
+  const user = axios.patch(`${API_URL}/user/update`, data, config)
+  return user
+}
+
 export const createMovie = (data) => {
   const config = getHeadersFormData()
   const movie = axios.post(`${API_URL}/movies`, data, config)
