@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a32f2434-8fbf-4741-bf32-0657d7cfe321/deploy-status)](https://app.netlify.com/sites/movies-sringtho/deploys)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
