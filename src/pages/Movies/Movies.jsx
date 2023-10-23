@@ -85,8 +85,8 @@ const Movies = () => {
     : search && searchList.length  === 0 
       ? [] 
       : movies
-
-
+  const API_URL = process.env.REACT_APP_API_URL
+  console.log(API_URL)
   return (
     <section className="movies_container">
       <header className="movies_header">
