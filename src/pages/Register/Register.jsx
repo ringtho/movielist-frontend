@@ -34,51 +34,53 @@ const Register = () => {
 
   return (
     <section className="login_container">
-      <h1>Movie Reel</h1>
-      <form className="login_wrapper" onSubmit={handleSubmit}>
-        {error && <p className="red">{error}</p>}
-        <h3>Register</h3>
-        <div className="login_group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="name"
-            id="name"
-            name="name"
-            value={user.name}
-            onChange={handleChange}
-            placeholder="eg John Doe"
-            required
-          />
-        </div>
-        <div className="login_group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-            placeholder="eg jdoe@email.com"
-            required
-          />
-        </div>
-        <div className="login_group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-            placeholder="********"
-            required
-          />
-        </div>
-        <div className="login_control">
-          <Link to="/login">Already a member?</Link>
-        </div>
-        <button>Register</button>
-      </form>
+      <div className='login_cont'>
+        <h1>Movie Reel</h1>
+        <form className="login_wrapper" onSubmit={handleSubmit}>
+          {error && <p className="red">{error}</p>}
+          <h3>Register</h3>
+          <div className="login_group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="name"
+              id="name"
+              name="name"
+              value={user.name}
+              onChange={handleChange}
+              placeholder="eg John Doe"
+              required
+            />
+          </div>
+          <div className="login_group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+              placeholder="eg jdoe@email.com"
+              required
+            />
+          </div>
+          <div className="login_group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              placeholder="********"
+              required
+            />
+          </div>
+          <div className="login_control">
+            <Link to="/login">Already a member?</Link>
+          </div>
+          <button>Register</button>
+        </form>
+      </div>
     </section>
   )
 }

@@ -31,7 +31,6 @@ const Profile = () => {
   const API_URL = process.env.REACT_APP_API_URL
   const img = API_URL + `/${user.profileImg}`
   const dispatch = useDispatch()
-  // const [reload, setReload] = useState(false)
 
   useEffect(() => {
     const getUserDetails = async () => {
@@ -81,8 +80,7 @@ const Profile = () => {
     dispatch(setIsLoading(true))
     const formData = new FormData()
     formData.append('name', newUserDetails.name)
-    formData.append('profileImg', newUserDetails.profileImg)
-    formData.append('image', newUserDetails.image)
+    formData.append('thumbnail', newUserDetails.image)
     try {
       await updateUserDetails(formData)
       dispatch(setIsLoading(false))
@@ -107,12 +105,12 @@ const Profile = () => {
     reader.readAsDataURL(file)
   }
 
-  console.log(isLoading)
-
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <div className="moviedetails_loading">
+          <Loading />
+        </div>
       ) : (
         <section className="profile_container">
           <div className="profile_details">
@@ -157,7 +155,7 @@ const Profile = () => {
                       <input
                         type="file"
                         hidden
-                        accept="image/*"
+                        accept=".jpg, .jpeg, .png"
                         id="upload-image"
                         onChange={handleFileUpload}
                       />

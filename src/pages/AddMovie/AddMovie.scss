@@ -1,6 +1,11 @@
+.add_add {
+    background: url(../../assets/movie-poster.jpg) no-repeat;
+    background-size: cover;
+}
+
 .addmovie_container {
+    background-color: rgba(0,0,0,0.9);
     padding: 2rem 1rem;
-    border: 1px solid red;
 
     display: flex;
     flex-direction: column;

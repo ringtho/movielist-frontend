@@ -4,8 +4,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { Avatar } from '@mui/material'
+import TuneIcon from '@mui/icons-material/Tune'
 import { getUser } from '../../api'
 import { useSelector } from 'react-redux'
+import LogoutIcon from '@mui/icons-material/Logout'
+// import Logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const [user, setUser] = useState({})
@@ -42,10 +45,11 @@ const Navbar = () => {
     <nav className="navbar_container">
       <div className="navbar_logo">
         <Link to="/">
+          {/* <img className='logo_smith' src={Logo} alt='' /> */}
           <h3>MovieReel</h3>
         </Link>
         <div className="navbar_controls">
-          <div className='navbar_avatar'>
+          <div className="navbar_avatar">
             <Avatar src={user.profileImg && img} />
           </div>
           <div
@@ -65,22 +69,27 @@ const Navbar = () => {
             <div className="pop_wrapper">
               <div className="user_info">
                 <div className="avatar_container">
-                  <Avatar src={user.profileImg && img} sx={{
-                    height:'90px',
-                    width: '90px'
-                  }} />
+                  <Avatar
+                    src={user.profileImg && img}
+                    sx={{
+                      height: '90px',
+                      width: '90px',
+                    }}
+                  />
                 </div>
                 <div className="user_details">
                   <p>{user.name}</p>
-                  <small>{ user.email }</small>
+                  <small>{user.email}</small>
                 </div>
               </div>
               <div className="controls">
-                <div>
-                  <p onClick={()=> handleNavigate()}>Profile</p>
+                <div className="controls_nav" onClick={() => handleNavigate()}>
+                  <TuneIcon sx={{ fontSize: '1rem', color: '#BB86Fc' }} />
+                  <p>Settings</p>
                 </div>
-                <div>
-                  <p onClick={() => logout()}>LogOut</p>
+                <div className="controls_nav" onClick={() => logout()}>
+                  <LogoutIcon sx={{ fontSize: '1rem', color: '#BB86Fc' }} />
+                  <p>LogOut</p>
                 </div>
               </div>
             </div>

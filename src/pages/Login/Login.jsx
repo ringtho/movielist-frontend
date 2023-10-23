@@ -33,40 +33,42 @@ const Login = () => {
 
   return (
     <section className="login_container">
-      <h1>Movie Reel</h1>
-      <form className="login_wrapper" onSubmit={handleSubmit}>
-        {error && <p className="red">{error}</p>}
-        {state?.message && <p className='alert'>{state?.message}</p>}
-        <h3>Login</h3>
-        <div className="login_group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-            placeholder="eg jdoe@email.com"
-            required
-          />
-        </div>
-        <div className="login_group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-            placeholder="********"
-            required
-          />
-        </div>
-        <div className="login_control">
-          <Link to="/register">New User?</Link>
-        </div>
-        <button>Submit</button>
-      </form>
+      <div className='login_cont'>
+        <h1>Movie Reel</h1>
+        <form className="login_wrapper" onSubmit={handleSubmit}>
+          {error && <p className="red">{error}</p>}
+          {state?.message && <p className="alert">{state?.message}</p>}
+          <h3>Login</h3>
+          <div className="login_group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+              placeholder="eg jdoe@email.com"
+              required
+            />
+          </div>
+          <div className="login_group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              placeholder="********"
+              required
+            />
+          </div>
+          <div className="login_control">
+            <Link to="/register">New User?</Link>
+          </div>
+          <button>Submit</button>
+        </form>
+      </div>
     </section>
   )
 }

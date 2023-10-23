@@ -83,12 +83,6 @@
         position: relative;
         height: 180px;
 
-        // border: 1px solid red;
-
-        // .avatar_pic {
-        //     position: relative;
-        // }
-
         .avatar_upload_controls {
             position: absolute;
             bottom: 0;
@@ -110,7 +104,6 @@
 
                 & > * {
                     opacity: 0.6;
-                    // color: var(--theme-color);
                 }
             }
         }

@@ -3,7 +3,7 @@ import { getAllMovies, getMovies } from '../../api'
 import Movie from '../../components/Movie/Movie'
 import './Movies.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMovies, setIsLoading } from '../../redux/slices/moviesSlice'
+import { setMovies, setIsLoading, addMovie } from '../../redux/slices/moviesSlice'
 import Loading from '../../components/Loading/Loading'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate } from 'react-router-dom'
@@ -18,9 +18,22 @@ const Movies = () => {
   const [allMovies, setAllMovies] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [isFavoriteChange, setIsFavoriteChange] = useState(null)
   
   useEffect(() => {
     dispatch(setIsLoading(true))
+    dispatch(
+      addMovie({
+        title: '',
+        genre: '',
+        releaseDate: null,
+        plot: '',
+        rating: 0,
+        notes: '',
+        favorited: false,
+        thumbnail: '',
+      })
+    )
     const getMoviesData = async () => {
       try {
         const { data } = await getMovies({ page: currentPage, size : 10 })
@@ -32,7 +45,7 @@ const Movies = () => {
       }
     }
     getMoviesData()
-  }, [dispatch, currentPage])
+  }, [dispatch, currentPage, isFavoriteChange])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -55,21 +68,18 @@ const Movies = () => {
   }
 
   const searchMovieByTitle = () => {
-    if (search === '') {
-      setSearchList([])
-    }
     setSearchList([])
     let results = []
-    const pattern = new RegExp(search, 'gi')
     for (const movie of allMovies) {
-      const title = movie.title
-      if (pattern.test(title)) {
+      const title = movie.title.toLowerCase()
+      console.log("Movie Title", title, search)
+      if (title.includes(search.toLowerCase())) {
         results.push(movie)
       }
     }
     setSearchList(results)
   }
-  const movieList = search && searchList.length > 0 ? searchList : movies
+  const movieList = search && searchList.length > 0 ? searchList : search && searchList.length  === 0 ? [] : movies
 
   return (
     <section className="movies_container">
@@ -103,11 +113,11 @@ const Movies = () => {
             </div>
             <div className="movies">
               {movieList.map((movie) => (
-                <Movie key={movie.id} movie={movie} />
+                <Movie key={movie.id} movie={movie} setIsFavoriteChange={setIsFavoriteChange} />
               ))}
             </div>
           </div>
-          {pages > 1 && (
+          {(movieList.length > 0 && pages > 1) && (
             <div className="pagination_controls">
               <Pagination
                 count={pages}

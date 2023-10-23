@@ -1,5 +1,10 @@
 .login_container {
-    background-color: var(--primary-color);
+    background: url(../../assets/background2.jpg) no-repeat;
+    background-size: cover;
+}
+
+.login_cont {
+    background-color: rgba(0,0,0,0.7);
     min-height: 100vh;
 
     display: flex;

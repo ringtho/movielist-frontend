@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, setIsFavoriteChange }) => {
   const [omdbPoster, setOmdbPoster] = useState("")
   const { title, releaseDate, rating, thumbnail, id, favorited } = movie
   const year = new Date(releaseDate).getFullYear()
@@ -24,20 +24,20 @@ const Movie = ({ movie }) => {
       }
     }
     getExternalData()
-  }, [title, year])
+  }, [title, year, favorite])
 
-  useEffect(() => {
-    const updateFavoriteMovie = async () => {
-      try {
-        const data = { id, favorited: favorite }
-        await favoriteMovie(data)
-      } catch (error) {
-        console.log(error)
-      }
+  const updateFavoriteMovie = async (value) => {
+    setIsFavoriteChange(null)
+    try {
+      const data = { id, favorited: value }
+      await favoriteMovie(data)
+      setFavorite(value)
+      setIsFavoriteChange(value)
+    } catch (error) {
+      console.log(error)
     }
-    updateFavoriteMovie()
-  }, [favorite, id])
-
+  }
+    
   const API_URL = process.env.REACT_APP_API_URL
   const img = API_URL + `/${movie.thumbnail}`
 
@@ -45,13 +45,7 @@ const Movie = ({ movie }) => {
     <section className="movie_container">
       <div className="movie_thumbnail" onClick={() => navigate(`${id}`)}>
         <img
-          src={
-            thumbnail
-              ? img
-              : omdbPoster
-              ? omdbPoster
-              : placeholderImg
-          }
+          src={thumbnail ? img : omdbPoster ? omdbPoster : placeholderImg}
           alt={title}
         />
       </div>
@@ -65,9 +59,7 @@ const Movie = ({ movie }) => {
                 sx={{
                   fontSize: '1rem',
                 }}
-                onClick={() => {
-                  setFavorite(!favorite)
-                }}
+                onClick={() => updateFavoriteMovie(false)}
               />
             ) : (
               <FavoriteBorderIcon
@@ -75,7 +67,7 @@ const Movie = ({ movie }) => {
                 sx={{
                   fontSize: '1rem',
                 }}
-                onClick={() => setFavorite(!favorite)}
+                onClick={() => updateFavoriteMovie(true)}
               />
             )}
           </div>
