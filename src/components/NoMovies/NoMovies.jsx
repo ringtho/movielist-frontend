@@ -7,8 +7,12 @@ const NoMovies = () => {
   return (
     <section className='nomovies_container'>
         <div className='nomovies_wrapper'>
-            <p className='nomovies_title'>Oops you haven't added a movie to the database yet</p>
-            <p className='nomovies_sub'>Start now by pressing the button below</p>
+            <p className='nomovies_title'>
+                Oops you haven't added a movie to the database yet
+                </p>
+            <p className='nomovies_sub'>
+                Start now by pressing the button below
+            </p>
             <button onClick={() => navigate('add')}>
                 Add Movie
             </button>

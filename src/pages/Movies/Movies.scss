@@ -70,6 +70,19 @@
 // search controls
 .search_controls {
     display: flex;
+    width: 100%;
+
+    @media screen and (min-width: 375px) {
+        width: 300px;
+    }
+
+    @media screen and (min-width: 680px) {
+        width: calc(680px - 4rem);
+    }
+
+    @media screen and (min-width: 996px) {
+        width: calc(996px - 4rem);
+    }
 }
 .search_input {
     border: 1px solid var(--secondary-color);
