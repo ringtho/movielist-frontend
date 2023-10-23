@@ -1,73 +1,81 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a32f2434-8fbf-4741-bf32-0657d7cfe321/deploy-status)](https://app.netlify.com/sites/movies-sringtho/deploys)
 
+# MovieReel Frontend
 
-# Getting Started with Create React App
+MovieReel Frontend web application allows you to explore and manage movie-related information using a user-friendly interface. You can access movie details, create new records, and more. This application was created using react and hosted on netlify. You can access the live application here: [MovieReel Live App](https://movies-sringtho.netlify.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+- Create a movie database by adding movies.
+- Mark movies as favorite and modify other details.
+- Delete movies.
+- Update user credentials and profile images
+- Responsive design that works well on both desktop and mobile devices.
 
-In the project directory, you can run:
+## Usage
 
-### `npm start`
+1. Visit the live application at [MovieReel Live App](https://movies-sringtho.netlify.app/).
+2. Login or create a new account
+3. To add a new movie to your movie Database, click the "add movie" button and you will be redirected to the add movie page which contains a form that you can fill up and press the submit button.
+4. To mark a movie as favorite or not favorite as, click the heart icon of any of the movies while on the homepage.
+5. To delete a movie, click the "Delete" button which is visible on the movie detail page. This can be accessed after clicking on a movie title or thumbnail while on the homepage. You can also click the edit button which will redirect you to the edit movie form where you can edit a movie's details.
+6. Your movie list will be saved, so you can return to it later.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Development
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If you want to run this application locally or modify it, you can follow these steps:
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
 
-### `npm run build`
+1. Clone this repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   git clone https://github.com/ringtho/movielist-frontend.git
+   cd movielist-frontend
+2. Install the dependencies:
+    ```bash
+   npm install
+3. Configure Environment Variables by creating a .env file and adding the following values
+    ```
+    REACT_APP_API_URL=http://127.0.0.1:5050/api/v1
+    REACT_APP_OMDB_API_KEY=your_omdb_api_key
+    ```
+    - REACT_APP_API_URL: This variable should point to the base URL where the MovieReel Backend API is hosted. The default value is set to the local development URL. The instructions for setting up the API locally can be accessed here: [MovieReel Database API](https://github.com/ringtho/movielist-backend)
+    - If you want to run the app on the live deployed API use 
+    ```
+    REACT_APP_API_URL=https://movie-sringtho-8352b0c3e296.herokuapp.com/api/v1
+    REACT_APP_OMDB_API_KEY=your_omdb_api_key
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    - REACT_APP_OMDB_API_KEY: To access movie details from the OMDB API, you'll need an API key from OMDB. Replace your_omdb_api_key with your actual OMDB API key.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    **Note**: Make sure to replace `your_omdb_api_key` in the `.env` configuration with your actual OMDB API key. Users can obtain their OMDB API key by registering on the [OMDB API website](http://www.omdbapi.com/apikey.aspx).
 
-### `npm run eject`
+3. Start the development server:
+    ```bash
+    npm start
+Open your web browser and navigate to http://localhost:3000 to view the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technologies Used
+- React.js
+- React Hooks
+- React Router
+- React Redux
+- SCSS for styling
+- Axios
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment
+The application is hosted on Netlify. Deployment is set up to be automatic whenever changes are pushed to the main branch.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## License
+This project is licensed under the MIT License.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Acknowledgments
+- Special thanks to the React community for providing a powerful and flexible library for building user interfaces.
+- Icons, and a few components from [Material UI](https://mui.com/).
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Happy movie exploring with MovieReel!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
