@@ -29,7 +29,6 @@ const AddMovie = () => {
     e.preventDefault()
     setIsSubmitting(true)
     const formData = new FormData()
-    formData.append('image', file)
     formData.append('title', movie.title)
     formData.append('plot', movie.plot)
     formData.append('genre', movie.genre)
@@ -37,30 +36,31 @@ const AddMovie = () => {
     formData.append('rating', movie.rating)
     formData.append('notes', movie.notes)
     formData.append('favorited', movie.favorited)
+    formData.append('thumbnail', file)
     try {
-        await createMovie(formData)
-        setFile('')
-        setIsSubmitting(false)
-        dispatch(
-          addMovie({
-            title: '',
-            genre: '',
-            releaseDate: null,
-            plot: '',
-            rating: 0,
-            notes: '',
-            favorited: false,
-            thumbnail: '',
-          })
-        )
-        navigate('/')
+      await createMovie(formData)
+      setFile('')
+      setIsSubmitting(false)
+      dispatch(
+        addMovie({
+          title: '',
+          genre: '',
+          releaseDate: null,
+          plot: '',
+          rating: 0,
+          notes: '',
+          favorited: false,
+          thumbnail: '',
+        })
+      )
+      navigate('/')
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
   }
 
   return (
-    <section className='add_add'>
+    <section className="add_add">
       <div className="addmovie_container">
         <div className="addmovie">
           <Back />
@@ -169,7 +169,7 @@ const AddMovie = () => {
                 id="thumbnail"
                 name="thumbnail"
                 type="file"
-                // value={image}
+                accept=".jpg, .jpeg, .png"
                 onChange={handleImageChange}
               />
             </div>
