@@ -85,8 +85,7 @@ const Movies = () => {
     : search && searchList.length  === 0 
       ? [] 
       : movies
-  const API_URL = process.env.REACT_APP_API_URL
-  console.log(API_URL)
+
   return (
     <section className="movies_container">
       <header className="movies_header">
@@ -112,6 +111,7 @@ const Movies = () => {
           onKeyUp={searchMovieByTitle}
         />
       </div>
+      {search && movieList.length > 0 && <p>Search Results for "{search}"</p>}
       {isLoading && movieList.length === 0 ? (
         <Loading />
       ) : movieList.length === 0 && !search && !isLoading ? (
