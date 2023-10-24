@@ -4,6 +4,7 @@ import './Register.scss'
 import { registerUser } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setRegister } from '../../redux/slices/authSlice'
+import Logo from '../../assets/icons8-film-80.png'
 
 const Register = () => {
   const user = useSelector(state => state.auth.registerInfo)
@@ -34,8 +35,11 @@ const Register = () => {
 
   return (
     <section className="login_container">
-      <div className='login_cont'>
-        <h1>Movie Reel</h1>
+      <div className="login_cont">
+        <div className="login_logo">
+          <img src={Logo} alt="logo" />
+          <h1>Movie Reel</h1>
+        </div>
         <form className="login_wrapper" onSubmit={handleSubmit}>
           {error && <p className="red">{error}</p>}
           <h3>Register</h3>

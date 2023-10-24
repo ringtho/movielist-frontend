@@ -4,12 +4,12 @@ import './Login.scss'
 import { loginUser } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLogin } from '../../redux/slices/authSlice'
+import Logo from '../../assets/icons8-film-80.png'
 
 const Login = () => {
   const {loginInfo: user } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const { state } = useLocation()
-  console.log(state)
   const [error, setError] = useState('')
   const navigate = useNavigate()
   const handleChange = (e) => {
@@ -33,8 +33,11 @@ const Login = () => {
 
   return (
     <section className="login_container">
-      <div className='login_cont'>
-        <h1>Movie Reel</h1>
+      <div className="login_cont">
+        <div className='login_logo'>
+          <img src={Logo} alt='logo' />
+          <h1>Movie Reel</h1>
+        </div>
         <form className="login_wrapper" onSubmit={handleSubmit}>
           {error && <p className="red">{error}</p>}
           {state?.message && <p className="alert">{state?.message}</p>}

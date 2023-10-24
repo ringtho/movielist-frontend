@@ -13,7 +13,12 @@ export const authSlice = createSlice({
       email: '',
       password: '',
     },
-    reload: false
+    reload: false,
+    user: {
+      name: '',
+      email: '',
+      profileImg: ''
+    }
   },
   reducers: {
     setRegister: (state, action) => {
@@ -24,9 +29,17 @@ export const authSlice = createSlice({
     },
     setReload: (state, action) => {
       state.reload = action.payload
+    },
+    setUser: (state, action) => {
+      state.user = action.payload
     }
   },
 })
 
-export const { setRegister, setLogin, setReload } = authSlice.actions
+export const { 
+  setRegister, 
+  setLogin, 
+  setReload, 
+  setUser 
+} = authSlice.actions
 export default authSlice.reducer
