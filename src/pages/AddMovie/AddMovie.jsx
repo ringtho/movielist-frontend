@@ -7,12 +7,14 @@ import DatePickerItem from '../../components/DatePicker/DatePicker'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
 import Rating from '@mui/material/Rating'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
+import placeholderImg from '../../assets/placeholder2.jpeg'
+import ClearIcon from '@mui/icons-material/Clear'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
   const [file, setFile] = useState("")
+  const [imageUrl, setImageUrl] = useState("")
   const { movie } = useSelector((state) => state.movies)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -22,7 +24,14 @@ const AddMovie = () => {
   }
 
   const handleImageChange = (e) => {
-    setFile(e.target.files[0])
+    const file = e.target.files[0]
+    const reader = new FileReader()
+
+    reader.onloadend = () => {
+      setFile(file)
+      setImageUrl(reader.result)
+    }
+    reader.readAsDataURL(file)
   }
 
   const handleSubmit = async (e) => {
@@ -39,7 +48,6 @@ const AddMovie = () => {
     formData.append('thumbnail', file)
     try {
       await createMovie(formData)
-      setFile('')
       setIsSubmitting(false)
       dispatch(
         addMovie({
@@ -47,12 +55,14 @@ const AddMovie = () => {
           genre: '',
           releaseDate: null,
           plot: '',
-          rating: 0,
+          rating: 1,
           notes: '',
           favorited: false,
           thumbnail: '',
         })
       )
+      setFile('')
+      setImageUrl('')
       navigate('/')
     } catch (error) {
       console.log(error)
@@ -108,7 +118,7 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label htmlFor="releaseDate">Release Date</label>
-              <DatePickerItem value={movie.releaseDate} />
+              <DatePickerItem />
             </div>
             <div className="add_controls">
               <label className="rating">Rating</label>
@@ -132,39 +142,27 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label className="rating">Favorite</label>
-              <div className="rating_results">
-                {movie.favorited ? (
-                  <FavoriteIcon
-                    className="favorite_filled"
-                    sx={{
-                      fontSize: '1.25rem',
-                    }}
-                    onClick={() => {
-                      dispatch(
-                        addMovie({ ...movie, favorited: !movie.favorited })
-                      )
-                    }}
-                  />
-                ) : (
-                  <FavoriteBorderIcon
-                    className="favorite_empty"
-                    sx={{
-                      fontSize: '1.25rem',
-                    }}
-                    onClick={() => {
-                      dispatch(
-                        addMovie({ ...movie, favorited: !movie.favorited })
-                      )
-                    }}
-                  />
-                )}
-                <small className={movie.favorited ? 'gold' : 'other'}>
-                  {movie.favorited ? 'favorite' : 'Not favorite'}
-                </small>
-              </div>
+              <FavoriteMovie />
             </div>
             <div className="add_controls">
               <label id="thumbnail">Upload Thumbnail</label>
+              <div className="add_image-container">
+                <img
+                  src={imageUrl ? imageUrl : placeholderImg}
+                  alt="add thumbnail"
+                />
+                {imageUrl && (
+                  <div className="edit_clear" title="Clear picture">
+                    <ClearIcon
+                      onClick={() => {
+                        setFile('')
+                        setImageUrl('')
+                      }}
+                      sx={{ fontSize: '1.25rem' }}
+                    />
+                  </div>
+                )}
+              </div>
               <input
                 id="thumbnail"
                 name="thumbnail"

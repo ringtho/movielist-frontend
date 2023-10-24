@@ -30,8 +30,17 @@
             text-decoration: none;
             color: #FFF;
 
-            h3 {
-                font-size: 1rem;
+            display: flex;
+            align-items: center;
+
+            .logo_title {
+                font-family: var(--secondary-font);
+                font-size: larger;
+            }
+
+            .logo_smith {
+                height: 50px;
+                width: 50px;
             }
         }
 
@@ -136,9 +145,4 @@
             }
         }
     }
-}
-
-.logo_smith {
-    height: 50px;
-    width: 100px;
 }

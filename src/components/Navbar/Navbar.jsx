@@ -6,15 +6,17 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { Avatar } from '@mui/material'
 import TuneIcon from '@mui/icons-material/Tune'
 import { getUser } from '../../api'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LogoutIcon from '@mui/icons-material/Logout'
-// import Logo from '../../assets/logo.png'
+import Logo from '../../assets/icons8-film-80.png'
+import { setUser } from '../../redux/slices/authSlice'
 
 const Navbar = () => {
-  const [user, setUser] = useState({})
+  const { user } = useSelector(state => state.auth)
   const [isActive, setIsActive] = useState(false)
   const { reload } = useSelector(state => state.auth)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const logout = () => {
     localStorage.removeItem('movieToken')
@@ -30,13 +32,13 @@ const Navbar = () => {
     const getUserDetails = async () => {
       try {
         const {data}= await getUser()
-        setUser(data.user)
+        dispatch(setUser(data.user))
       } catch (error) {
         console.log(error)
       }
     }
     getUserDetails()
-  }, [reload])
+  }, [reload, dispatch])
 
   const API_URL = process.env.REACT_APP_API_URL
   const img = API_URL + `/${user.profileImg}`
@@ -44,10 +46,12 @@ const Navbar = () => {
   return (
     <nav className="navbar_container">
       <div className="navbar_logo">
-        <Link to="/">
-          {/* <img className='logo_smith' src={Logo} alt='' /> */}
-          <h3>MovieReel</h3>
-        </Link>
+        <div className='logo_container'>
+          <Link to="/">
+            <img className="logo_smith" src={Logo} alt="logo" />
+            <h3 className='logo_title'>MovieReel</h3>
+          </Link>
+        </div>
         <div className="navbar_controls">
           <div className="navbar_avatar">
             <Avatar src={user.profileImg && img} />

@@ -90,17 +90,17 @@ const Movies = () => {
     <section className="movies_container">
       <header className="movies_header">
         <h1 className="movies_title">Movies</h1>
-        <div className="medium_sorts">
+        {movies.length > 0 && <div className="medium_sorts">
           <SortControls allMovies={allMovies} />
-        </div>
+        </div>}
         <button onClick={() => navigate('add')} className="add_btn">
           Add Movie
         </button>
       </header>
-      <div className="sorts_small">
+      {movies.length > 0 && <div className="sorts_small">
         <SortControls allMovies={allMovies} />
-      </div>
-      <div className="search_controls">
+      </div>}
+      {movies.length > 0 && (<div className="search_controls">
         <input
           className="search_input"
           placeholder="Search for movie by title"
@@ -111,6 +111,7 @@ const Movies = () => {
           onKeyUp={searchMovieByTitle}
         />
       </div>
+      )}
       {search && movieList.length > 0 && <p>Search Results for "{search}"</p>}
       {isLoading && movieList.length === 0 ? (
         <Loading />

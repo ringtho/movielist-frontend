@@ -5,7 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './DatePicker.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 const DatePickerItem = ({ value }) => {
   const valueItem = value || null
@@ -15,7 +15,7 @@ const DatePickerItem = ({ value }) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         name="releaseDate"
-        value={dayjs(valueItem)}
+        value={valueItem}
         onChange={(newValue) =>
           dispatch(addMovie({
             ...movie,
