@@ -117,7 +117,7 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label htmlFor="releaseDate">Release Date</label>
-              <DatePickerItem value={movie.releaseDate} />
+              <DatePickerItem  />
             </div>
             <div className="add_controls">
               <label className="rating">Rating</label>

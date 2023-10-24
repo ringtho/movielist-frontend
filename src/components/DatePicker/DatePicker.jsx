@@ -8,14 +8,14 @@ import { addMovie } from '../../redux/slices/moviesSlice'
 import dayjs from 'dayjs'
 
 const DatePickerItem = ({ value }) => {
-  const valueItem = value || null
+  const valueItem = dayjs(value) || dayjs()
   const dispatch = useDispatch()
   const { movie } = useSelector(state => state.movies)
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         name="releaseDate"
-        value={dayjs(valueItem)}
+        value={valueItem}
         onChange={(newValue) =>
           dispatch(addMovie({
             ...movie,
