@@ -7,8 +7,9 @@ import DatePickerItem from '../../components/DatePicker/DatePicker'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
 import Rating from '@mui/material/Rating'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+// import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
@@ -132,36 +133,7 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label className="rating">Favorite</label>
-              <div className="rating_results">
-                {movie.favorited ? (
-                  <FavoriteIcon
-                    className="favorite_filled"
-                    sx={{
-                      fontSize: '1.25rem',
-                    }}
-                    onClick={() => {
-                      dispatch(
-                        addMovie({ ...movie, favorited: !movie.favorited })
-                      )
-                    }}
-                  />
-                ) : (
-                  <FavoriteBorderIcon
-                    className="favorite_empty"
-                    sx={{
-                      fontSize: '1.25rem',
-                    }}
-                    onClick={() => {
-                      dispatch(
-                        addMovie({ ...movie, favorited: !movie.favorited })
-                      )
-                    }}
-                  />
-                )}
-                <small className={movie.favorited ? 'gold' : 'other'}>
-                  {movie.favorited ? 'favorite' : 'Not favorite'}
-                </small>
-              </div>
+              <FavoriteMovie />
             </div>
             <div className="add_controls">
               <label id="thumbnail">Upload Thumbnail</label>

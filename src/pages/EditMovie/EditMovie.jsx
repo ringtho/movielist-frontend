@@ -8,11 +8,10 @@ import Back from '../../components/Back/Back'
 import DatePickerItem from '../../components/DatePicker/DatePicker'
 import dayjs from 'dayjs'
 import Rating from '@mui/material/Rating'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import FavoriteIcon from '@mui/icons-material/Favorite'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Loading from '../../components/Loading/Loading'
+import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
 
 const EditMovie = () => {
   const { movie, isLoading } = useSelector(state => state.movies)
@@ -36,7 +35,6 @@ const EditMovie = () => {
     e.preventDefault()
     setIsSubmitting(true)
     const formData = new FormData()
-    // formData.append('image', file)
     formData.append('id', movie.id)
     formData.append('title', movie.title)
     formData.append('plot', movie.plot)
@@ -164,36 +162,7 @@ const EditMovie = () => {
                 </div>
                 <div className="add_controls">
                   <label className="rating">Favorite</label>
-                  <div className="rating_results">
-                    {movie.favorited ? (
-                      <FavoriteIcon
-                        className="favorite_filled"
-                        sx={{
-                          fontSize: '1.25rem',
-                        }}
-                        onClick={() => {
-                          dispatch(
-                            addMovie({ ...movie, favorited: !movie.favorited })
-                          )
-                        }}
-                      />
-                    ) : (
-                      <FavoriteBorderIcon
-                        className="favorite_empty"
-                        sx={{
-                          fontSize: '1.25rem',
-                        }}
-                        onClick={() => {
-                          dispatch(
-                            addMovie({ ...movie, favorited: !movie.favorited })
-                          )
-                        }}
-                      />
-                    )}
-                    <small className={movie.favorited ? 'gold' : 'other'}>
-                      {movie.favorited ? 'favorite' : 'Not favorite'}
-                    </small>
-                  </div>
+                  <FavoriteMovie />
                 </div>
                 <div className="add_controls">
                   <label id="thumbnail">Update Thumbnail</label>
