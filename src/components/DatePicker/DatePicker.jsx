@@ -5,10 +5,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './DatePicker.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 const DatePickerItem = ({ value }) => {
-  const valueItem = dayjs(value) || dayjs()
+  const valueItem = value || null
   const dispatch = useDispatch()
   const { movie } = useSelector(state => state.movies)
   return (

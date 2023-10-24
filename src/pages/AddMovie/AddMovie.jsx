@@ -9,6 +9,7 @@ import { addMovie } from '../../redux/slices/moviesSlice'
 import Rating from '@mui/material/Rating'
 import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
 import placeholderImg from '../../assets/placeholder2.jpeg'
+import ClearIcon from '@mui/icons-material/Clear'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
@@ -54,7 +55,7 @@ const AddMovie = () => {
           genre: '',
           releaseDate: null,
           plot: '',
-          rating: 0,
+          rating: 1,
           notes: '',
           favorited: false,
           thumbnail: '',
@@ -117,7 +118,7 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label htmlFor="releaseDate">Release Date</label>
-              <DatePickerItem  />
+              <DatePickerItem />
             </div>
             <div className="add_controls">
               <label className="rating">Rating</label>
@@ -145,8 +146,22 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label id="thumbnail">Upload Thumbnail</label>
-              <div className='add_image-container'>
-                <img src={imageUrl ? imageUrl : placeholderImg} alt='add thumbnail' />
+              <div className="add_image-container">
+                <img
+                  src={imageUrl ? imageUrl : placeholderImg}
+                  alt="add thumbnail"
+                />
+                {imageUrl && (
+                  <div className="edit_clear" title="Clear picture">
+                    <ClearIcon
+                      onClick={() => {
+                        setFile('')
+                        setImageUrl('')
+                      }}
+                      sx={{ fontSize: '1.25rem' }}
+                    />
+                  </div>
+                )}
               </div>
               <input
                 id="thumbnail"

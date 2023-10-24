@@ -37,7 +37,7 @@ const EditMovie = () => {
     reader.onloadend = () => {
       setFile(file)
       setImageUrl(reader.result)
-      e.target.value = null
+      // e.target.value = null
     }
     reader.readAsDataURL(file)
   }
