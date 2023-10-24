@@ -1,7 +1,7 @@
 .nomovies_container {
     display: flex;
     justify-content: center;
-    min-height: 90vh;
+    min-height: 50vh;
     
 
     .nomovies_wrapper {
@@ -15,12 +15,22 @@
 
         .nomovies_title {
             color: rgba(255,255,255,0.3);
-            font-size: 1.25rem;
+            font-size: 1rem;
         }
 
         .nomovies_sub {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: rgba(255,255,255,0.6);
+        }
+
+        @media screen and (min-width: 768px) {
+            .nomovies_title {
+                font-size: 1.25rem;
+            }
+
+            .nomovies_sub {
+                font-size: 1rem;
+            }
         }
     }
 }
