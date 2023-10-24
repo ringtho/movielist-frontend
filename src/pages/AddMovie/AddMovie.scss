@@ -81,7 +81,6 @@ button:disabled {
 
 .rating_results {
     display: flex;
-    // border: 1px solid red;
     justify-content: space-between;
 
     p {
@@ -94,5 +93,21 @@ button:disabled {
 
     .other {
         color: var(--tertiary-color);
+    }
+}
+
+.add_image-container {
+    height: 120px;
+    width: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        border-radius: 0.5rem;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
     }
 }

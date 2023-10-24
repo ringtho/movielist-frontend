@@ -12,10 +12,12 @@ import placeholderImg from '../../assets/placeholder2.jpeg'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Loading from '../../components/Loading/Loading'
 import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
+import ClearIcon from '@mui/icons-material/Clear'
 
 const EditMovie = () => {
   const { movie, isLoading } = useSelector(state => state.movies)
   const [file, setFile] = useState("")
+  const [imageUrl, setImageUrl] = useState('')
   const [omdbPoster, setOmdbPoster] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isImageDeleted, setIsImageDeleted] = useState(false)
@@ -29,6 +31,15 @@ const EditMovie = () => {
 
   const handleImageChange = (e) => {
     setFile(e.target.files[0])
+    const file = e.target.files[0]
+    const reader = new FileReader()
+
+    reader.onloadend = () => {
+      setFile(file)
+      setImageUrl(reader.result)
+      e.target.value = null
+    }
+    reader.readAsDataURL(file)
   }
 
   const handleSubmit = async (e) => {
@@ -165,20 +176,35 @@ const EditMovie = () => {
                   <FavoriteMovie />
                 </div>
                 <div className="add_controls">
-                  <label id="thumbnail">Update Thumbnail</label>
                   <div className="thumbnail_cont">
-                    <div className="thumbnail_img">
-                      <img
-                        src={
-                          movie.thumbnail
-                            ? img
-                            : omdbPoster
-                            ? omdbPoster
-                            : placeholderImg
-                        }
-                        alt={movie.title}
-                      />
-                      {movie.thumbnail && (
+                    <div className="thumbnail_upload">
+                      <label id="thumbnail">Update Thumbnail</label>
+                      <div className="add_image-container">
+                        <img
+                          src={
+                            imageUrl
+                              ? imageUrl
+                              : movie.thumbnail
+                              ? img
+                              : omdbPoster
+                              ? omdbPoster
+                              : placeholderImg
+                          }
+                          alt={movie.title}
+                        />
+                        {imageUrl && (
+                          <div className="edit_clear" title='Clear picture'>
+                            <ClearIcon
+                              onClick={() => {
+                                setFile('')
+                                setImageUrl('')
+                              }}
+                              sx={{ fontSize: '1.25rem' }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                      {movie.thumbnail && !imageUrl && (
                         <div
                           onClick={handleRemove}
                           className="remove_thumbnail"
@@ -187,9 +213,6 @@ const EditMovie = () => {
                           <p className="remove_text">Remove thumbnail</p>
                         </div>
                       )}
-                    </div>
-                    <div className="thumbnail_upload">
-                      <label id="thumbnail">Update Thumbnail</label>
                       <input
                         id="thumbnail"
                         name="thumbnail"

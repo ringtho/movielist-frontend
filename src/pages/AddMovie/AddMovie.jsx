@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
 import Rating from '@mui/material/Rating'
 import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-// import FavoriteIcon from '@mui/icons-material/Favorite'
+import placeholderImg from '../../assets/placeholder2.jpeg'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
   const [file, setFile] = useState("")
+  const [imageUrl, setImageUrl] = useState("")
   const { movie } = useSelector((state) => state.movies)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -23,7 +23,14 @@ const AddMovie = () => {
   }
 
   const handleImageChange = (e) => {
-    setFile(e.target.files[0])
+    const file = e.target.files[0]
+    const reader = new FileReader()
+
+    reader.onloadend = () => {
+      setFile(file)
+      setImageUrl(reader.result)
+    }
+    reader.readAsDataURL(file)
   }
 
   const handleSubmit = async (e) => {
@@ -40,7 +47,6 @@ const AddMovie = () => {
     formData.append('thumbnail', file)
     try {
       await createMovie(formData)
-      setFile('')
       setIsSubmitting(false)
       dispatch(
         addMovie({
@@ -54,6 +60,8 @@ const AddMovie = () => {
           thumbnail: '',
         })
       )
+      setFile('')
+      setImageUrl('')
       navigate('/')
     } catch (error) {
       console.log(error)
@@ -137,6 +145,9 @@ const AddMovie = () => {
             </div>
             <div className="add_controls">
               <label id="thumbnail">Upload Thumbnail</label>
+              <div className='add_image-container'>
+                <img src={imageUrl ? imageUrl : placeholderImg} alt='add thumbnail' />
+              </div>
               <input
                 id="thumbnail"
                 name="thumbnail"
