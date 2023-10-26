@@ -13,8 +13,7 @@ const DeleteMovie = ({ setIsActive }) => {
 
   const handleDeleteClick = async () => {
     try {
-      const res = await deleteMovie(movie.id)
-      console.log(res)
+      await deleteMovie(movie.id)
       navigate('/')
       setIsActive(false)
     } catch (error) {

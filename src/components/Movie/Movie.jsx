@@ -77,6 +77,7 @@ const Movie = ({ movie, setIsFavoriteChange }) => {
           <Rating
             name="size-medium"
             defaultValue={rating}
+            value={rating}
             readOnly
             size="small"
             precision={0.5}
