@@ -6,7 +6,9 @@ import {
   movieTitleAscSort,
   movieTitleDescSort,
   movieYearAscSort,
-  movieYearDescSort
+  movieYearDescSort,
+  ratingAscSort,
+  ratingDescSort
 } from '../utils/sort'
 import PropTypes from 'prop-types'
 
@@ -31,16 +33,24 @@ const SortControls = ({ allMovies }) => {
       const sortedList = movieYearDescSort(allMovies)
       dispatch(setMovies([...sortedList]))
     }
+    if (sortBy === 'rating desc') {
+      const sortedList = ratingDescSort(allMovies)
+      dispatch(setMovies([...sortedList]))
+    }
+    if (sortBy === 'rating asc') {
+      const sortedList = ratingAscSort(allMovies)
+      dispatch(setMovies([...sortedList]))
+    }
   }
 
   return (
     <div className="sort_small">
       <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
         <optgroup>
-          <option value="title asc">
-            Title Ascending
-          </option>
+          <option value="title asc">Title Ascending</option>
           <option value="title desc">Title Descending</option>
+          <option value="rating desc">Rating (Highest - Lowest)</option>
+          <option value="rating asc">Rating (Lowest - Highest)</option>
           <option value="date asc">Release Date Ascending</option>
           <option value="date desc">Release Date Descending</option>
         </optgroup>
