@@ -1,7 +1,7 @@
 import React from 'react'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import './Back.scss'
 import { useNavigate } from 'react-router-dom'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
 const Back = () => {
   const navigate = useNavigate()

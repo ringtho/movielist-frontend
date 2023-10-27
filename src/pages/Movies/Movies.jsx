@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { getAllMovies, getMovies } from '../../api'
-import Movie from '../../components/Movie/Movie'
-import './Movies.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { setMovies, setIsLoading, addMovie } from '../../redux/slices/moviesSlice'
-import Loading from '../../components/Loading/Loading'
-import Pagination from '@mui/material/Pagination'
 import { useNavigate } from 'react-router-dom'
-import SortControls from '../../components/SortControls/SortControls'
-import NoMovies from '../../components/NoMovies/NoMovies'
-import NoSearchItems from '../../components/NoSearchItems/NoSearchItems'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllMovies, getMovies } from '../../api'
+import { setMovies, setIsLoading, addMovie } from '../../redux/slices/moviesSlice'
+import Pagination from '@mui/material/Pagination'
+import { SortControls, NoMovies, NoSearchItems, Movie, Loading } from '../../components'
+import './Movies.scss'
 
 const Movies = () => {
   const { movies, isLoading } = useSelector(state => state.movies)
@@ -30,7 +26,7 @@ const Movies = () => {
         genre: '',
         releaseDate: null,
         plot: '',
-        rating: 0,
+        rating: 1,
         notes: '',
         favorited: false,
         thumbnail: '',
@@ -132,7 +128,7 @@ const Movies = () => {
               ))}
             </div>
           </div>
-          {movieList.length > 0 && pages > 1 && (
+          {(movieList.length > 0 && pages > 1) && (
             <div className="pagination_controls">
               <Pagination
                 count={pages}

@@ -4,14 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addMovie, setIsLoading } from '../../redux/slices/moviesSlice'
 import { deleteThumbnail, getMovie, updateMovie, getOmdbMovie } from '../../api'
 import { useNavigate, useParams } from 'react-router-dom'
-import Back from '../../components/Back/Back'
-import DatePickerItem from '../../components/DatePicker/DatePicker'
 import dayjs from 'dayjs'
 import Rating from '@mui/material/Rating'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import DeleteIcon from '@mui/icons-material/Delete'
-import Loading from '../../components/Loading/Loading'
-import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
+import { Loading, FavoriteMovie, DatePickerItem, Back } from '../../components'
 import ClearIcon from '@mui/icons-material/Clear'
 
 const EditMovie = () => {
@@ -37,7 +34,6 @@ const EditMovie = () => {
     reader.onloadend = () => {
       setFile(file)
       setImageUrl(reader.result)
-      // e.target.value = null
     }
     reader.readAsDataURL(file)
   }
@@ -158,8 +154,8 @@ const EditMovie = () => {
                       name="size-medium"
                       sx={{
                         color: '#BB86Fc',
-                        width: '32px',
-                        height: '32px',
+                        width: '60px',
+                        height: '60px',
                       }}
                       size="large"
                       value={movie.rating}

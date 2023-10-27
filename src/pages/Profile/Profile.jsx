@@ -5,7 +5,7 @@ import { Avatar, IconButton } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsLoading } from '../../redux/slices/moviesSlice'
-import Loading from '../../components/Loading/Loading'
+import { Loading } from '../../components'
 import ClearIcon from '@mui/icons-material/Clear'
 import { setReload } from '../../redux/slices/authSlice'
 

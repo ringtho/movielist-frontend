@@ -9,7 +9,7 @@ import {
   movieYearDescSort 
 } from '../utils/sort'
 
-const SortControlsMobile = ({ allMovies }) => {
+const SortControls = ({ allMovies }) => {
     const dispatch = useDispatch()
     const [sortBy, setSortBy] = useState('title asc')
 
@@ -51,4 +51,4 @@ const SortControlsMobile = ({ allMovies }) => {
   )
 }
 
-export default SortControlsMobile
+export default SortControls

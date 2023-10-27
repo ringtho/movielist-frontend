@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './MovieDetail.scss'
 import { useNavigate, useParams } from 'react-router-dom'
-import placeholderImg from '../../assets/placeholder2.jpeg'
 import { getMovie, getOmdbMovie } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie, setIsLoading } from '../../redux/slices/moviesSlice'
-import DeleteMovie from '../DeleteMovie/DeleteMovie'
-import Loading from '../../components/Loading/Loading'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-import NotFoundMovie from '../../components/NotFoundMovie/NotFoundMovie'
+import { DeleteMovie } from '../'
+import { Loading, NotFoundMovie } from '../../components'
 import Rating from '@mui/material/Rating'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import placeholderImg from '../../assets/placeholder2.jpeg'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({

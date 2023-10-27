@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import placeholderImg from '../../assets/placeholder2.jpeg'
 import Rating from '@mui/material/Rating'
 import './Movie.scss'
 import { favoriteMovie, getOmdbMovie } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import placeholderImg from '../../assets/placeholder2.jpeg'
 
 const Movie = ({ movie, setIsFavoriteChange }) => {
   const [omdbPoster, setOmdbPoster] = useState("")
