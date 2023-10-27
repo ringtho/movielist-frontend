@@ -5,6 +5,7 @@
 ![Demo](./public/homepage.jpeg)
 
 MovieReel Frontend web application allows you to explore and manage movie-related information using a user-friendly interface. You can access movie details, create new records, and more. This application was created using react and hosted on netlify. You can access the live application here: [MovieReel Live App](https://movies-sringtho.netlify.app/)
+For a quick login on the live application, use **email**: admin@admin.com and **password:** admin which has some movies already added to it.
 
 ## Features
 
