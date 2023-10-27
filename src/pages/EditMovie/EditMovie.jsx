@@ -4,29 +4,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addMovie, setIsLoading } from '../../redux/slices/moviesSlice'
 import { deleteThumbnail, getMovie, updateMovie, getOmdbMovie } from '../../api'
 import { useNavigate, useParams } from 'react-router-dom'
-import Back from '../../components/Back/Back'
-import DatePickerItem from '../../components/DatePicker/DatePicker'
 import dayjs from 'dayjs'
 import Rating from '@mui/material/Rating'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import DeleteIcon from '@mui/icons-material/Delete'
-import Loading from '../../components/Loading/Loading'
-import FavoriteMovie from '../../components/FavoriteMovie/FavoriteMovie'
+import { Loading, FavoriteMovie, DatePickerItem, Back } from '../../components'
 import ClearIcon from '@mui/icons-material/Clear'
 
 const EditMovie = () => {
   const { movie, isLoading } = useSelector(state => state.movies)
-  const [file, setFile] = useState("")
+  const [file, setFile] = useState('')
   const [imageUrl, setImageUrl] = useState('')
-  const [omdbPoster, setOmdbPoster] = useState("")
+  const [omdbPoster, setOmdbPoster] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isImageDeleted, setIsImageDeleted] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { id }= useParams()
+  const { id } = useParams()
 
   const handleChange = (e) => {
-    dispatch(addMovie({...movie, [e.target.name]: e.target.value}))
+    dispatch(addMovie({ ...movie, [e.target.name]: e.target.value }))
   }
 
   const handleImageChange = (e) => {
@@ -37,7 +34,6 @@ const EditMovie = () => {
     reader.onloadend = () => {
       setFile(file)
       setImageUrl(reader.result)
-      // e.target.value = null
     }
     reader.readAsDataURL(file)
   }
@@ -56,16 +52,13 @@ const EditMovie = () => {
     formData.append('favorited', movie.favorited)
     formData.append('thumbnail', file)
     try {
-        await updateMovie({ formData, id: movie.id })
-        setIsSubmitting(false)
-        navigate(`/${movie.id}`)
+      await updateMovie({ formData, id: movie.id })
+      setIsSubmitting(false)
+      navigate(`/${movie.id}`)
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
   }
-
-  const API_URL = process.env.REACT_APP_API_URL
-  const img = API_URL + `/${movie.thumbnail}`
 
   const handleRemove = async () => {
     try {
@@ -75,6 +68,9 @@ const EditMovie = () => {
       console.log(error)
     }
   }
+
+  const API_URL = process.env.REACT_APP_API_URL
+  const img = API_URL + `/${movie.thumbnail}`
 
   useEffect(() => {
     dispatch(setIsLoading(true))
@@ -88,18 +84,19 @@ const EditMovie = () => {
         dispatch(setIsLoading(false))
       } catch (error) {
         console.log(error)
-      } 
+      }
     }
     getMovieDetails()
   }, [id, dispatch, isImageDeleted])
 
   return (
     <>
-      {isLoading ? (
+      {isLoading
+        ? (
         <div className="moviedetails_loading">
           <Loading />
-        </div>
-      ) : (
+        </div>)
+        : (
         <section className="add_add">
           <div className="addmovie_container">
             <div className="addmovie">
@@ -158,8 +155,8 @@ const EditMovie = () => {
                       name="size-medium"
                       sx={{
                         color: '#BB86Fc',
-                        width: '32px',
-                        height: '32px',
+                        width: '60px',
+                        height: '60px'
                       }}
                       size="large"
                       value={movie.rating}
@@ -182,13 +179,9 @@ const EditMovie = () => {
                       <div className="add_image-container">
                         <img
                           src={
-                            imageUrl
-                              ? imageUrl
-                              : movie.thumbnail
+                            imageUrl || (movie.thumbnail
                               ? img
-                              : omdbPoster
-                              ? omdbPoster
-                              : placeholderImg
+                              : omdbPoster || placeholderImg)
                           }
                           alt={movie.title}
                         />
@@ -238,8 +231,7 @@ const EditMovie = () => {
               </form>
             </div>
           </div>
-        </section>
-      )}
+        </section>)}
     </>
   )
 }

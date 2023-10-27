@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('movieToken')
@@ -13,6 +14,10 @@ const ProtectedRoute = ({ children }) => {
     )
   }
   return children
+}
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.object
 }
 
 export default ProtectedRoute

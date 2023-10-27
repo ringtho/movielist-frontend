@@ -5,7 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './DatePicker.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie } from '../../redux/slices/moviesSlice'
-// import dayjs from 'dayjs'
+import PropTypes from 'prop-types'
 
 const DatePickerItem = ({ value }) => {
   const valueItem = value || null
@@ -19,7 +19,7 @@ const DatePickerItem = ({ value }) => {
         onChange={(newValue) =>
           dispatch(addMovie({
             ...movie,
-            releaseDate: newValue?.format('YYYY-MM-DD'),
+            releaseDate: newValue?.format('YYYY-MM-DD')
           }))
         }
         isRequired
@@ -34,12 +34,20 @@ const DatePickerItem = ({ value }) => {
             p: '0.75rem 1rem',
             fontFamily: 'Montserrat, sans-serif',
             letterSpacing: '0.75px',
-            label: { color: '#BB86Fc' },
-          },
+            label: { color: '#BB86Fc' }
+          }
         }}
       />
     </LocalizationProvider>
   )
+}
+
+DatePickerItem.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.instanceOf(Date)
+  ])
 }
 
 export default DatePickerItem

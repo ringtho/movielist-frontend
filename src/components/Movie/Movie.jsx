@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import placeholderImg from '../../assets/placeholder2.jpeg'
 import Rating from '@mui/material/Rating'
 import './Movie.scss'
 import { favoriteMovie, getOmdbMovie } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import placeholderImg from '../../assets/placeholder2.jpeg'
+import PropTypes from 'prop-types'
 
 const Movie = ({ movie, setIsFavoriteChange }) => {
-  const [omdbPoster, setOmdbPoster] = useState("")
+  const [omdbPoster, setOmdbPoster] = useState('')
   const { title, releaseDate, rating, thumbnail, id, favorited } = movie
   const year = new Date(releaseDate).getFullYear()
   const navigate = useNavigate()
@@ -37,7 +38,7 @@ const Movie = ({ movie, setIsFavoriteChange }) => {
       console.log(error)
     }
   }
-    
+
   const API_URL = process.env.REACT_APP_API_URL
   const img = API_URL + `/${movie.thumbnail}`
 
@@ -45,7 +46,7 @@ const Movie = ({ movie, setIsFavoriteChange }) => {
     <section className="movie_container">
       <div className="movie_thumbnail" onClick={() => navigate(`${id}`)}>
         <img
-          src={thumbnail ? img : omdbPoster ? omdbPoster : placeholderImg}
+          src={thumbnail ? img : omdbPoster || placeholderImg}
           alt={title}
         />
       </div>
@@ -53,23 +54,26 @@ const Movie = ({ movie, setIsFavoriteChange }) => {
         <div className="movie_info">
           <div className="movie_year">
             <small>{year}</small>
-            {favorite ? (
+            {favorite
+              ? (
               <FavoriteIcon
                 className="favorite_filled"
                 sx={{
-                  fontSize: '1rem',
+                  fontSize: '1rem'
                 }}
                 onClick={() => updateFavoriteMovie(false)}
               />
-            ) : (
+                )
+              : (
               <FavoriteBorderIcon
                 className="favorite_empty"
                 sx={{
-                  fontSize: '1rem',
+                  fontSize: '1rem'
                 }}
                 onClick={() => updateFavoriteMovie(true)}
               />
-            )}
+                )
+            }
           </div>
           <p className="title" onClick={() => navigate(`${id}`)}>
             {title}
@@ -82,13 +86,18 @@ const Movie = ({ movie, setIsFavoriteChange }) => {
             size="small"
             precision={0.5}
             sx={{
-              color: '#BB86Fc',
+              color: '#BB86Fc'
             }}
           />
         </div>
       </div>
     </section>
   )
+}
+
+Movie.propTypes = {
+  movie: PropTypes.object,
+  setIsFavoriteChange: PropTypes.func
 }
 
 export default Movie

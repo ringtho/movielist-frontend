@@ -1,5 +1,6 @@
 import React from 'react'
 import './NoSearchItems.scss'
+import PropTypes from 'prop-types'
 
 const NoSearchItems = ({ search }) => {
   return (
@@ -9,6 +10,10 @@ const NoSearchItems = ({ search }) => {
         </div>
     </section>
   )
+}
+
+NoSearchItems.propTypes = {
+  search: PropTypes.string
 }
 
 export default NoSearchItems

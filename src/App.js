@@ -1,17 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Login, Register } from "./pages";
-import Layout from "./pages/Layout/Layout";
-import Movies from "./pages/Movies/Movies";
-import MovieDetail from "./pages/MovieDetail/MovieDetail";
-import AddMovie from "./pages/AddMovie/AddMovie";
-import EditMovie from "./pages/EditMovie/EditMovie";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import NotFound from "./pages/NotFound/NotFound";
-import NotFoundMovie from "./components/NotFoundMovie/NotFoundMovie";
-import Profile from "./pages/Profile/Profile";
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  Login,
+  Register,
+  Layout,
+  Movies,
+  MovieDetail,
+  AddMovie,
+  EditMovie,
+  Profile,
+  NotFound
+} from './pages'
+import { ProtectedRoute, NotFoundMovie } from './components'
 
-function App() {
-
+function App () {
   return (
     <div className="App">
       <Router>
@@ -60,4 +62,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

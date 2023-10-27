@@ -5,7 +5,7 @@ import { Avatar, IconButton } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsLoading } from '../../redux/slices/moviesSlice'
-import Loading from '../../components/Loading/Loading'
+import { Loading } from '../../components'
 import ClearIcon from '@mui/icons-material/Clear'
 import { setReload } from '../../redux/slices/authSlice'
 
@@ -41,7 +41,7 @@ const Profile = () => {
         setUser(data.user)
         setNewUserDetails({
           name: data.user.name,
-          profileImg: data.user.profileImg,
+          profileImg: data.user.profileImg
         })
         dispatch(setIsLoading(false))
       } catch (error) {
@@ -52,26 +52,26 @@ const Profile = () => {
   }, [dispatch, reload])
 
   const handleChange = (e) => {
-    setNewUserDetails({...newUserDetails, [e.target.name]: e.target.value})
+    setNewUserDetails({ ...newUserDetails, [e.target.name]: e.target.value })
   }
 
   const handlePasswordChange = (e) => {
-    setNewPassword({...newPassword, [e.target.name]: e.target.value})
+    setNewPassword({ ...newPassword, [e.target.name]: e.target.value })
   }
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault()
     setError('')
     try {
-        const { data } = await updatePassword(newPassword)
-        setAlert(data.msg)
+      const { data } = await updatePassword(newPassword)
+      setAlert(data.msg)
     } catch (error) {
-        setError(error.response.data.error)
+      setError(error.response.data.error)
     } finally {
-        setNewPassword({
-          oldPassword: '',
-          password: '',
-        })
+      setNewPassword({
+        oldPassword: '',
+        password: ''
+      })
     }
   }
 
@@ -84,7 +84,7 @@ const Profile = () => {
     try {
       await updateUserDetails(formData)
       dispatch(setIsLoading(false))
-      setNewUserDetails({...newUserDetails, image: '', imageUrl: ''})
+      setNewUserDetails({ ...newUserDetails, image: '', imageUrl: '' })
       dispatch(setReload(true))
     } catch (error) {
       console.log(error)
@@ -97,7 +97,7 @@ const Profile = () => {
 
     reader.onloadend = () => {
       setNewUserDetails({
-        ...newUserDetails, 
+        ...newUserDetails,
         imageUrl: reader.result,
         image: file
       })
@@ -107,11 +107,12 @@ const Profile = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading
+        ? (
         <div className="moviedetails_loading">
           <Loading />
-        </div>
-      ) : (
+        </div>)
+        : (
         <section className="profile_container">
           <div className="profile_details">
             <h2>Account</h2>
@@ -125,28 +126,29 @@ const Profile = () => {
                   }
                   sx={{
                     height: '150px',
-                    width: '150px',
+                    width: '150px'
                   }}
                   className="avatar_pic"
                 />
                 <div className="avatar_upload_controls">
-                  {newUserDetails.imageUrl ? (
+                  {newUserDetails.imageUrl
+                    ? (
                     <ClearIcon
                       onClick={() =>
                         setNewUserDetails({
                           ...newUserDetails,
                           imageUrl: '',
-                          image: '',
+                          image: ''
                         })
                       }
                       sx={{ color: '#323232', fontSize: '1.25rem' }}
-                    />
-                  ) : (
+                    />)
+                    : (
                     <IconButton
                       aria-label="upload profile picture"
                       component="label"
                       sx={{
-                        padding: '0',
+                        padding: '0'
                       }}
                     >
                       <PhotoCamera
@@ -159,8 +161,8 @@ const Profile = () => {
                         id="upload-image"
                         onChange={handleFileUpload}
                       />
-                    </IconButton>
-                  )}
+                    </IconButton>)
+                  }
                 </div>
               </div>
               <div className="profile_user">
@@ -231,8 +233,8 @@ const Profile = () => {
               </form>
             </div>
           </div>
-        </section>
-      )}
+        </section>)
+      }
     </>
   )
 }

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './MovieDetail.scss'
 import { useNavigate, useParams } from 'react-router-dom'
-import placeholderImg from '../../assets/placeholder2.jpeg'
 import { getMovie, getOmdbMovie } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { addMovie, setIsLoading } from '../../redux/slices/moviesSlice'
-import DeleteMovie from '../DeleteMovie/DeleteMovie'
-import Loading from '../../components/Loading/Loading'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-import NotFoundMovie from '../../components/NotFoundMovie/NotFoundMovie'
+import { DeleteMovie } from '../'
+import { Loading, NotFoundMovie } from '../../components'
 import Rating from '@mui/material/Rating'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import placeholderImg from '../../assets/placeholder2.jpeg'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState({
@@ -42,16 +41,16 @@ const MovieDetail = () => {
     setIsActive(false)
     dispatch(setIsLoading(true))
     const getMovieDetails = async () => {
-        try {
-            const { data } = await getMovie(id)
-            const year = new Date(data.movie.releaseDate).getFullYear()
-            const ombdData = await getOmdbMovie({title: data.movie.title, year })
-            setMovie(data.movie)
-            setOmdb(ombdData.data)
-            dispatch(setIsLoading(false))
-        } catch (error) {
-            setError(error?.response?.status)
-        }
+      try {
+        const { data } = await getMovie(id)
+        const year = new Date(data.movie.releaseDate).getFullYear()
+        const ombdData = await getOmdbMovie({ title: data.movie.title, year })
+        setMovie(data.movie)
+        setOmdb(ombdData.data)
+        dispatch(setIsLoading(false))
+      } catch (error) {
+        setError(error?.response?.status)
+      }
     }
     getMovieDetails()
   }, [id, dispatch])
@@ -61,13 +60,14 @@ const MovieDetail = () => {
 
   return (
     <>
-      {error === 404 ? (
-        <NotFoundMovie />
-      ) : isLoading ? (
+      {error === 404
+        ? <NotFoundMovie />
+        : isLoading
+          ? (
         <div className="moviedetails_loading">
           <Loading />
-        </div>
-      ) : (
+        </div>)
+          : (
         <section className="moviedetail">
           <div className="moviedetail_back">
             <div className="back_controls" onClick={() => navigate('/')}>
@@ -86,8 +86,8 @@ const MovieDetail = () => {
                     movie.thumbnail
                       ? img
                       : omdb.Poster
-                      ? omdb.Poster
-                      : placeholderImg
+                        ? omdb.Poster
+                        : placeholderImg
                   }
                   alt={movie.title}
                 />
@@ -101,7 +101,7 @@ const MovieDetail = () => {
                     <FavoriteIcon
                       className="favorite_no_action"
                       sx={{
-                        fontSize: '1.25rem',
+                        fontSize: '1.25rem'
                       }}
                     />
                   )}
@@ -144,7 +144,7 @@ const MovieDetail = () => {
                     readOnly
                     precision={0.5}
                     sx={{
-                      color: '#BB86Fc',
+                      color: '#BB86Fc'
                     }}
                   />
                 </div>
@@ -158,7 +158,7 @@ const MovieDetail = () => {
                         readOnly
                         precision={0.5}
                         sx={{
-                          color: '#9A7D31',
+                          color: '#9A7D31'
                         }}
                       />
                     </div>
@@ -190,8 +190,7 @@ const MovieDetail = () => {
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </section>)}
       {isActive && <DeleteMovie setIsActive={setIsActive} />}
     </>
   )

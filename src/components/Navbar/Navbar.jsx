@@ -31,7 +31,7 @@ const Navbar = () => {
   useEffect(() => {
     const getUserDetails = async () => {
       try {
-        const {data}= await getUser()
+        const { data } = await getUser()
         dispatch(setUser(data.user))
       } catch (error) {
         console.log(error)
@@ -42,7 +42,7 @@ const Navbar = () => {
 
   const API_URL = process.env.REACT_APP_API_URL
   const img = API_URL + `/${user.profileImg}`
-  
+
   return (
     <nav className="navbar_container">
       <div className="navbar_logo">
@@ -60,11 +60,10 @@ const Navbar = () => {
             className="navbar_hamburger"
             onClick={() => setIsActive(!isActive)}
           >
-            {!isActive ? (
-              <MenuIcon sx={{ width: '30px', height: '50px' }} />
-            ) : (
-              <MenuOpenIcon sx={{ width: '30px', height: '50px' }} />
-            )}
+            {!isActive
+              ? <MenuIcon sx={{ width: '30px', height: '50px' }} />
+              : <MenuOpenIcon sx={{ width: '30px', height: '50px' }} />
+            }
           </div>
         </div>
 
@@ -77,7 +76,7 @@ const Navbar = () => {
                     src={user.profileImg && img}
                     sx={{
                       height: '90px',
-                      width: '90px',
+                      width: '90px'
                     }}
                   />
                 </div>

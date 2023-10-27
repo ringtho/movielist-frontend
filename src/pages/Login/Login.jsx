@@ -7,7 +7,7 @@ import { setLogin } from '../../redux/slices/authSlice'
 import Logo from '../../assets/icons8-film-80.png'
 
 const Login = () => {
-  const {loginInfo: user } = useSelector(state => state.auth)
+  const { loginInfo: user } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const { state } = useLocation()
   const [error, setError] = useState('')
@@ -15,7 +15,7 @@ const Login = () => {
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    dispatch(setLogin({...user, [name]: value}))
+    dispatch(setLogin({ ...user, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
@@ -24,10 +24,10 @@ const Login = () => {
       const res = await loginUser(user)
       localStorage.setItem('movieToken', res.data.token)
       navigate('/')
-    } catch(error) {
+    } catch (error) {
       setError(error.response.data.error)
     } finally {
-      dispatch(setLogin({ email: "", password: "" }))
+      dispatch(setLogin({ email: '', password: '' }))
     }
   }
 
