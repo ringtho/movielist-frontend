@@ -3,6 +3,7 @@ import './DeleteMovie.scss'
 import { useSelector } from 'react-redux'
 import { deleteMovie } from '../../api'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const DeleteMovie = ({ setIsActive }) => {
   const { movie } = useSelector((state) => state.movies)
@@ -34,6 +35,10 @@ const DeleteMovie = ({ setIsActive }) => {
       </div>
     </section>
   )
+}
+
+DeleteMovie.propTypes = {
+  setIsActive: PropTypes.func
 }
 
 export default DeleteMovie

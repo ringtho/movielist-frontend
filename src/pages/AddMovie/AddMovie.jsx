@@ -11,8 +11,8 @@ import ClearIcon from '@mui/icons-material/Clear'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
-  const [file, setFile] = useState("")
-  const [imageUrl, setImageUrl] = useState("")
+  const [file, setFile] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
   const { movie } = useSelector((state) => state.movies)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -56,7 +56,7 @@ const AddMovie = () => {
           rating: 1,
           notes: '',
           favorited: false,
-          thumbnail: '',
+          thumbnail: ''
         })
       )
       setFile('')
@@ -126,7 +126,7 @@ const AddMovie = () => {
                   sx={{
                     color: '#BB86Fc',
                     width: '32px',
-                    height: '32px',
+                    height: '32px'
                   }}
                   size="large"
                   value={movie.rating}
@@ -146,7 +146,7 @@ const AddMovie = () => {
               <label id="thumbnail">Upload Thumbnail</label>
               <div className="add_image-container">
                 <img
-                  src={imageUrl ? imageUrl : placeholderImg}
+                  src={ imageUrl || placeholderImg }
                   alt="add thumbnail"
                 />
                 {imageUrl && (

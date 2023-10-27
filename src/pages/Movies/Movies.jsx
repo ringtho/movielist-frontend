@@ -11,13 +11,13 @@ const Movies = () => {
   const { movies, isLoading } = useSelector(state => state.movies)
   const [pages, setPages] = useState(1)
   const [currentPage, setCurrentPage] = useState(1)
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('')
   const [searchList, setSearchList] = useState([])
   const [allMovies, setAllMovies] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [isFavoriteChange, setIsFavoriteChange] = useState(null)
-  
+
   useEffect(() => {
     dispatch(setIsLoading(true))
     dispatch(
@@ -29,16 +29,16 @@ const Movies = () => {
         rating: 1,
         notes: '',
         favorited: false,
-        thumbnail: '',
+        thumbnail: ''
       })
     )
     const getMoviesData = async () => {
       try {
-        const { data } = await getMovies({ page: currentPage, size : 10 })
+        const { data } = await getMovies({ page: currentPage, size: 10 })
         dispatch(setMovies(data.movies))
         setPages(data.pages)
         dispatch(setIsLoading(false))
-      } catch(error){
+      } catch (error) {
         console.log(error)
       }
     }
@@ -55,7 +55,7 @@ const Movies = () => {
       }
     }
     getMovies()
-  },[])
+  }, [])
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage)
@@ -67,7 +67,7 @@ const Movies = () => {
 
   const searchMovieByTitle = () => {
     setSearchList([])
-    let results = []
+    const results = []
     for (const movie of allMovies) {
       const title = movie.title.toLowerCase()
       if (title.includes(search.toLowerCase())) {
@@ -76,46 +76,53 @@ const Movies = () => {
     }
     setSearchList(results)
   }
-  const movieList = search && searchList.length > 0 
-    ? searchList 
-    : search && searchList.length  === 0 
-      ? [] 
+  const movieList = search && searchList.length > 0
+    ? searchList
+    : search && searchList.length === 0
+      ? []
       : movies
 
   return (
     <section className="movies_container">
       <header className="movies_header">
         <h1 className="movies_title">Movies</h1>
-        {movies.length > 0 && <div className="medium_sorts">
-          <SortControls allMovies={allMovies} />
-        </div>}
+        {movies.length > 0 && (
+          <div className="medium_sorts">
+            <SortControls allMovies={allMovies} />
+          </div>
+        )}
         <button onClick={() => navigate('add')} className="add_btn">
           Add Movie
         </button>
       </header>
-      {movies.length > 0 && <div className="sorts_small">
-        <SortControls allMovies={allMovies} />
-      </div>}
-      {movies.length > 0 && (<div className="search_controls">
-        <input
-          className="search_input"
-          placeholder="Search for movie by title"
-          type="text"
-          name="search"
-          value={search}
-          onChange={handleSearchChange}
-          onKeyUp={searchMovieByTitle}
-        />
-      </div>
+      {movies.length > 0 && (
+        <div className="sorts_small">
+          <SortControls allMovies={allMovies} />
+        </div>
       )}
-      {search && movieList.length > 0 && <p>Search Results for "{search}"</p>}
-      {isLoading && movieList.length === 0 ? (
-        <Loading />
-      ) : movieList.length === 0 && !search && !isLoading ? (
-        <NoMovies />
-      ) : search && movieList.length === 0 ? (
-        <NoSearchItems search={search} />
-      ) : (
+      {movies.length > 0 && (
+        <div className="search_controls">
+          <input
+            className="search_input"
+            placeholder="Search for movie by title"
+            type="text"
+            name="search"
+            value={search}
+            onChange={handleSearchChange}
+            onKeyUp={searchMovieByTitle}
+          />
+        </div>
+      )}
+      {search && movieList.length > 0 && (
+        <p>Search Results for &quot;{search}&quot;</p>
+      )}
+      {(isLoading && movieList.length === 0)
+        ? <Loading />
+        : movieList.length === 0 && !search && !isLoading
+          ? <NoMovies />
+          : search && movieList.length === 0
+            ? <NoSearchItems search={search} />
+            : (
         <div className="movies_wrapper">
           <div className="movies_top">
             <div className="movies">
@@ -128,7 +135,7 @@ const Movies = () => {
               ))}
             </div>
           </div>
-          {(movieList.length > 0 && pages > 1) && (
+          {movieList.length > 0 && pages > 1 && (
             <div className="pagination_controls">
               <Pagination
                 count={pages}
@@ -138,8 +145,8 @@ const Movies = () => {
               />
             </div>
           )}
-        </div>
-      )}
+        </div>)
+      }
     </section>
   )
 }

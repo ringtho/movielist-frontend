@@ -30,8 +30,14 @@ export const moviesSlice = createSlice({
     setOmdbData: (state, action) => {
       state.omdbData = action.payload
     }
-  },
+  }
 })
 
-export const { addMovie, setMovies, setIsLoading, setOmdbPoster, setOmdbData } = moviesSlice.actions
+export const {
+  addMovie,
+  setMovies,
+  setIsLoading,
+  setOmdbPoster,
+  setOmdbData
+} = moviesSlice.actions
 export default moviesSlice.reducer

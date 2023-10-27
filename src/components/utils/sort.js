@@ -1,17 +1,17 @@
 // Function to sort movie by movie title in descending order
 
 export const movieTitleDescSort = (allMovies) => {
-   const sortedList = allMovies.sort((a, b) => {
-     if (a.title.toLowerCase() > b.title.toLowerCase()) {
-       return -1
-     }
-     if (a.title.toLowerCase() < b.title.toLowerCase()) {
-       return 1
-     }
-     return 0
-   })
-   return sortedList
- }
+  const sortedList = allMovies.sort((a, b) => {
+    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return -1
+    }
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return 1
+    }
+    return 0
+  })
+  return sortedList
+}
 
 // Function to sort movie by movie title in ascending order
 export const movieTitleAscSort = (allMovies) => {
@@ -26,7 +26,6 @@ export const movieTitleAscSort = (allMovies) => {
   })
   return sortedList
 }
-
 
 // Function to sort movie by release Date in ascending order
 export const movieYearAscSort = (allMovies) => {

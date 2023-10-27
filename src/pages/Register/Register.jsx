@@ -10,26 +10,26 @@ const Register = () => {
   const user = useSelector(state => state.auth.registerInfo)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    dispatch(setRegister({...user, [name]: value}))
+    dispatch(setRegister({ ...user, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       await registerUser(user)
-      navigate('/login', 
-      { state: { message: 'Login to continue' }, 
-      replace: true 
-    })
+      navigate('/login', {
+        state: { message: 'Login to continue' },
+        replace: true
+      })
     } catch (error) {
       setError(error.response.data.error)
     } finally {
-      dispatch(setRegister({ email: "", name: "", password: "" }))
+      dispatch(setRegister({ email: '', name: '', password: '' }))
     }
   }
 

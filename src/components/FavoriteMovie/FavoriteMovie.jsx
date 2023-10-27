@@ -10,27 +10,30 @@ const FavoriteMovie = () => {
   const { movie } = useSelector((state) => state.movies)
   return (
     <div className="rating_results">
-      {movie.favorited ? (
+      {movie.favorited
+        ? (
         <FavoriteIcon
           className="favorite_filled"
           sx={{
-            fontSize: '1.25rem',
+            fontSize: '1.25rem'
           }}
           onClick={() => {
             dispatch(addMovie({ ...movie, favorited: !movie.favorited }))
           }}
         />
-      ) : (
+          )
+        : (
         <FavoriteBorderIcon
           className="favorite_empty"
           sx={{
-            fontSize: '1.25rem',
+            fontSize: '1.25rem'
           }}
           onClick={() => {
             dispatch(addMovie({ ...movie, favorited: !movie.favorited }))
           }}
         />
-      )}
+          )
+      }
       <small className={movie.favorited ? 'gold' : 'other'}>
         {movie.favorited ? 'favorite' : 'Not favorite'}
       </small>

@@ -41,16 +41,16 @@ const MovieDetail = () => {
     setIsActive(false)
     dispatch(setIsLoading(true))
     const getMovieDetails = async () => {
-        try {
-            const { data } = await getMovie(id)
-            const year = new Date(data.movie.releaseDate).getFullYear()
-            const ombdData = await getOmdbMovie({title: data.movie.title, year })
-            setMovie(data.movie)
-            setOmdb(ombdData.data)
-            dispatch(setIsLoading(false))
-        } catch (error) {
-            setError(error?.response?.status)
-        }
+      try {
+        const { data } = await getMovie(id)
+        const year = new Date(data.movie.releaseDate).getFullYear()
+        const ombdData = await getOmdbMovie({ title: data.movie.title, year })
+        setMovie(data.movie)
+        setOmdb(ombdData.data)
+        dispatch(setIsLoading(false))
+      } catch (error) {
+        setError(error?.response?.status)
+      }
     }
     getMovieDetails()
   }, [id, dispatch])
@@ -60,13 +60,14 @@ const MovieDetail = () => {
 
   return (
     <>
-      {error === 404 ? (
-        <NotFoundMovie />
-      ) : isLoading ? (
+      {error === 404
+        ? <NotFoundMovie />
+        : isLoading
+          ? (
         <div className="moviedetails_loading">
           <Loading />
-        </div>
-      ) : (
+        </div>)
+          : (
         <section className="moviedetail">
           <div className="moviedetail_back">
             <div className="back_controls" onClick={() => navigate('/')}>
@@ -85,8 +86,8 @@ const MovieDetail = () => {
                     movie.thumbnail
                       ? img
                       : omdb.Poster
-                      ? omdb.Poster
-                      : placeholderImg
+                        ? omdb.Poster
+                        : placeholderImg
                   }
                   alt={movie.title}
                 />
@@ -100,7 +101,7 @@ const MovieDetail = () => {
                     <FavoriteIcon
                       className="favorite_no_action"
                       sx={{
-                        fontSize: '1.25rem',
+                        fontSize: '1.25rem'
                       }}
                     />
                   )}
@@ -143,7 +144,7 @@ const MovieDetail = () => {
                     readOnly
                     precision={0.5}
                     sx={{
-                      color: '#BB86Fc',
+                      color: '#BB86Fc'
                     }}
                   />
                 </div>
@@ -157,7 +158,7 @@ const MovieDetail = () => {
                         readOnly
                         precision={0.5}
                         sx={{
-                          color: '#9A7D31',
+                          color: '#9A7D31'
                         }}
                       />
                     </div>
@@ -189,8 +190,7 @@ const MovieDetail = () => {
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </section>)}
       {isActive && <DeleteMovie setIsActive={setIsActive} />}
     </>
   )
