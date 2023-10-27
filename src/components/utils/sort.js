@@ -54,3 +54,19 @@ export const movieYearDescSort = (allMovies) => {
   })
   return sortedList
 }
+
+// Function to sort movie by rating in descending order
+export const ratingDescSort = (allMovies) => {
+  const sortedList = allMovies.sort((a, b) => {
+    return b.rating - a.rating
+  })
+  return sortedList
+}
+
+// Function to sort movie by rating in descending order
+export const ratingAscSort = (allMovies) => {
+  const sortedList = allMovies.sort((a, b) => {
+    return a.rating - b.rating
+  })
+  return sortedList
+}
