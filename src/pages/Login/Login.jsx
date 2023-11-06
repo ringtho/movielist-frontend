@@ -5,6 +5,7 @@ import { loginUser } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLogin } from '../../redux/slices/authSlice'
 import Logo from '../../assets/icons8-film-80.png'
+import { useForm } from 'react-hook-form'
 
 const Login = () => {
   const { loginInfo: user } = useSelector(state => state.auth)
@@ -18,8 +19,7 @@ const Login = () => {
     dispatch(setLogin({ ...user, [name]: value }))
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (e) => {
     try {
       const res = await loginUser(user)
       localStorage.setItem('movieToken', res.data.token)
@@ -31,40 +31,61 @@ const Login = () => {
     }
   }
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
+
   return (
     <section className="login_container">
       <div className="login_cont">
-        <div className='login_logo'>
-          <img src={Logo} alt='logo' />
+        <div className="login_logo">
+          <img src={Logo} alt="logo" />
           <h1>Movie Reel</h1>
         </div>
-        <form className="login_wrapper" onSubmit={handleSubmit}>
+        <form className="login_wrapper" onSubmit={handleSubmit(onSubmit)}>
           {error && <p className="red">{error}</p>}
           {state?.message && <p className="alert">{state?.message}</p>}
           <h3>Login</h3>
           <div className="login_group">
             <label htmlFor="email">Email</label>
             <input
-              type="email"
+              {...register('email', {
+                required: 'Email is required',
+                validate: {
+                  matchPattern: (v) =>
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+                    'Please provide a valid email address'
+                }
+              })}
               id="email"
               name="email"
               value={user.email}
               onChange={handleChange}
               placeholder="eg jdoe@email.com"
-              required
             />
+            {errors.email?.message && <p className="errors">{errors.email.message}</p>}
           </div>
           <div className="login_group">
             <label htmlFor="password">Password</label>
             <input
+              {...register('password', { required: 'Password is required' })}
               type="password"
               id="password"
               name="password"
               value={user.password}
               onChange={handleChange}
               placeholder="********"
-              required
             />
+            {errors.password?.type === 'required' && (
+              <p className="errors">{errors.password.message}</p>
+            )}
           </div>
           <div className="login_control">
             <Link to="/register">New User?</Link>
