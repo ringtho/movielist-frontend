@@ -35,12 +35,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({
-    defaultValues: {
-      email: '',
-      password: ''
-    }
-  })
+  } = useForm()
 
   return (
     <section className="login_container">
