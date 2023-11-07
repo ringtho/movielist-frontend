@@ -82,7 +82,9 @@ const AddMovie = () => {
           >
             <h1>Add a new movie?</h1>
             <div className="add_controls">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">
+                Title <span>*</span>
+              </label>
               <input
                 {...register('title', { required: 'Title is required' })}
                 type="text"
@@ -97,7 +99,9 @@ const AddMovie = () => {
               )}
             </div>
             <div className="add_controls">
-              <label htmlFor="genre">Genre</label>
+              <label htmlFor="genre">
+                Genre <span>*</span>
+              </label>
               <input
                 {...register('genre', { required: 'Genre is required' })}
                 type="text"
@@ -112,7 +116,9 @@ const AddMovie = () => {
               )}
             </div>
             <div className="add_controls">
-              <label htmlFor="plot">Plot</label>
+              <label htmlFor="plot">
+                Plot <span>*</span>
+              </label>
               <textarea
                 {...register('plot', { required: 'Plot is required' })}
                 type="text"
@@ -127,7 +133,9 @@ const AddMovie = () => {
               )}
             </div>
             <div className="add_controls">
-              <label htmlFor="releaseDate">Release Date</label>
+              <label htmlFor="releaseDate">
+                Release Date <span>*</span>
+              </label>
               <DatePickerItem />
             </div>
             <div className="add_controls">
