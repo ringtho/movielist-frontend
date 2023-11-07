@@ -95,7 +95,8 @@ const EditMovie = () => {
         ? (
         <div className="moviedetails_loading">
           <Loading />
-        </div>)
+        </div>
+          )
         : (
         <section className="add_add">
           <div className="addmovie_container">
@@ -108,7 +109,9 @@ const EditMovie = () => {
               >
                 <h1>Edit</h1>
                 <div className="add_controls">
-                  <label htmlFor="title">Title</label>
+                  <label htmlFor="title">
+                    Title <span>*</span>
+                  </label>
                   <input
                     type="text"
                     id="title"
@@ -120,7 +123,9 @@ const EditMovie = () => {
                   />
                 </div>
                 <div className="add_controls">
-                  <label htmlFor="genre">Genre</label>
+                  <label htmlFor="genre">
+                    Genre <span>*</span>
+                  </label>
                   <input
                     type="text"
                     id="genre"
@@ -132,7 +137,9 @@ const EditMovie = () => {
                   />
                 </div>
                 <div className="add_controls">
-                  <label htmlFor="plot">Plot</label>
+                  <label htmlFor="plot">
+                    Plot <span>*</span>
+                  </label>
                   <textarea
                     type="text"
                     id="plot"
@@ -144,7 +151,9 @@ const EditMovie = () => {
                   />
                 </div>
                 <div className="add_controls">
-                  <label htmlFor="releaseDate">Release Date</label>
+                  <label htmlFor="releaseDate">
+                    Release Date <span>*</span>
+                  </label>
 
                   <DatePickerItem value={dayjs(movie.releaseDate)} />
                 </div>
@@ -179,14 +188,15 @@ const EditMovie = () => {
                       <div className="add_image-container">
                         <img
                           src={
-                            imageUrl || (movie.thumbnail
+                            imageUrl ||
+                            (movie.thumbnail
                               ? img
                               : omdbPoster || placeholderImg)
                           }
                           alt={movie.title}
                         />
                         {imageUrl && (
-                          <div className="edit_clear" title='Clear picture'>
+                          <div className="edit_clear" title="Clear picture">
                             <ClearIcon
                               onClick={() => {
                                 setFile('')
@@ -231,7 +241,9 @@ const EditMovie = () => {
               </form>
             </div>
           </div>
-        </section>)}
+        </section>
+          )
+      }
     </>
   )
 }

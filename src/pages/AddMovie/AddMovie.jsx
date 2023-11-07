@@ -8,6 +8,7 @@ import Rating from '@mui/material/Rating'
 import { DatePickerItem, FavoriteMovie, Back } from '../../components'
 import placeholderImg from '../../assets/placeholder2.jpeg'
 import ClearIcon from '@mui/icons-material/Clear'
+import { useForm } from 'react-hook-form'
 
 const AddMovie = () => {
   const dispatch = useDispatch()
@@ -32,8 +33,7 @@ const AddMovie = () => {
     reader.readAsDataURL(file)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (e) => {
     setIsSubmitting(true)
     const formData = new FormData()
     formData.append('title', movie.title)
@@ -67,6 +67,8 @@ const AddMovie = () => {
     }
   }
 
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
   return (
     <section className="add_add">
       <div className="addmovie_container">
@@ -75,47 +77,64 @@ const AddMovie = () => {
           <form
             className="addmovie_wrapper"
             encType="multipart/form-data"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <h1>Add a new movie?</h1>
             <div className="add_controls">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">
+                Title <span>*</span>
+              </label>
               <input
+                {...register('title', { required: 'Title is required' })}
                 type="text"
                 id="title"
                 name="title"
                 value={movie.title}
                 onChange={handleChange}
                 placeholder="eg Mr Smith and Mrs Smith"
-                required
               />
+              {errors.title?.message && (
+                <p className="errors">{errors.title.message}</p>
+              )}
             </div>
             <div className="add_controls">
-              <label htmlFor="genre">Genre</label>
+              <label htmlFor="genre">
+                Genre <span>*</span>
+              </label>
               <input
+                {...register('genre', { required: 'Genre is required' })}
                 type="text"
                 id="genre"
                 name="genre"
                 value={movie.genre}
                 onChange={handleChange}
                 placeholder="eg Action"
-                required
               />
+              {errors.genre?.message && (
+                <p className="errors">{errors.genre.message}</p>
+              )}
             </div>
             <div className="add_controls">
-              <label htmlFor="plot">Plot</label>
+              <label htmlFor="plot">
+                Plot <span>*</span>
+              </label>
               <textarea
+                {...register('plot', { required: 'Plot is required' })}
                 type="text"
                 id="plot"
                 name="plot"
                 value={movie.plot}
                 onChange={handleChange}
                 placeholder="eg A secret service agent revenges the death of his wife"
-                required
               />
+              {errors.plot?.message && (
+                <p className="errors">{errors.plot.message}</p>
+              )}
             </div>
             <div className="add_controls">
-              <label htmlFor="releaseDate">Release Date</label>
+              <label htmlFor="releaseDate">
+                Release Date <span>*</span>
+              </label>
               <DatePickerItem />
             </div>
             <div className="add_controls">
@@ -145,10 +164,7 @@ const AddMovie = () => {
             <div className="add_controls">
               <label id="thumbnail">Upload Thumbnail</label>
               <div className="add_image-container">
-                <img
-                  src={ imageUrl || placeholderImg }
-                  alt="add thumbnail"
-                />
+                <img src={imageUrl || placeholderImg} alt="add thumbnail" />
                 {imageUrl && (
                   <div className="edit_clear" title="Clear picture">
                     <ClearIcon
