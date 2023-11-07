@@ -34,7 +34,6 @@ const AddMovie = () => {
   }
 
   const onSubmit = async (e) => {
-    // e.preventDefault()
     setIsSubmitting(true)
     const formData = new FormData()
     formData.append('title', movie.title)

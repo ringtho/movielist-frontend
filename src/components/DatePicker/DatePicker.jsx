@@ -11,7 +11,6 @@ const DatePickerItem = ({ value }) => {
   const valueItem = value || null
   const dispatch = useDispatch()
   const { movie } = useSelector(state => state.movies)
-  console.log(movie)
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
